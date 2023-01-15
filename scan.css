@@ -1,0 +1,36 @@
+body{
+    background: white;
+    font-family: 'Baloo Chettan 2', cursive;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content:center;
+    align-items: center;
+    height: 100vh;
+    margin-top: 220px;
+}
+
+.result{
+    background-color: green;
+    color:#fff;
+    padding:20px;
+  }
+  .row{
+    display:flex;
+  }
+  .body{
+    display:flex;
+    align-items:center;
+
+  }
+
+button{
+  background-color: rgb(213, 213, 213);
+  cursor: pointer;
+  color: black;
+  border-radius: 7px;
+}
+
+#find{ /* usado # para pegar a id*/
+  background-color: purple;
+}

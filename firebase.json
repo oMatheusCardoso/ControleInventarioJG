@@ -1,0 +1,10 @@
+{
+  "hosting": {
+    "public": "https://github.com/MatheusJG/QRCODEJG",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}

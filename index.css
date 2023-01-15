@@ -1,0 +1,63 @@
+body{
+    background: white;
+    font-family: 'Baloo Chettan 2', cursive;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content:center;
+    align-items: center;
+    height: 100vh;
+}
+
+input{
+    border: 2px rounded black;
+    
+}
+input, button{ 
+    padding: 4px;
+    margin-bottom: 10px;
+    width: -webkit-fill-available;
+    border-radius: 10px;
+}
+.clear{
+    background-color: transparent;
+    border: none;
+}
+.solid{
+    background: #500878;
+    color: white;
+
+
+}
+button{
+    cursor: pointer;
+   width: 80%;
+   margin-left: 10%;
+   margin-top: 30px;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}
+button:active{
+    opacity: 0.8;
+}
+form{
+    width: 300px;
+}
+
+.title{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    
+}
+
+
+
+
+.Error{
+    color: red;
+    font-size: 11px;
+    display: none
+}

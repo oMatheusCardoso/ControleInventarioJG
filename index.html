@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <title>Controle de TI</title>
+</head>
+
+<link rel="stylesheet" href="index.css">
+<head>
+  <a href="https://www.jovensgenios.com"><img src="logo.png" alt="Logo Jovens Gênios" ></a>
+
+</head>
+
+<body>
+
+    
+    <div class="title">
+        
+        <h1>Controle de Equipamentos</h1>
+    </div>
+
+    <form>
+        <div>
+            <div><label for="Email">Email</label></div>
+            <input type="email" name="email" id="email" onchange="onChangeEmail()"  placeholder="jovens.genios@jovensgenios.com">
+            <div class="Error" id="email-necessario">Email obrigatório</div>
+            <div class="Error" id="email-senha-incorreta">Email ou senha incorreta</div>
+         </div>
+            
+         <div>
+            <div><label for="Senha"></label>Senha</div>
+            <input type="password" name="password" id="password" onchange="onChangePassword()" placeholder="Senha">    
+            <div class="Error" id="senha-necessaria">Senha obrigatória</div>
+                   
+         </div>
+
+         <div>
+            <button type="button" id="entrar" class="solid" onclick="login()" >Entrar</button>
+         </div>
+
+         <div>
+            <button type="button" id="recuperar" class="clear" >Recuperar Senha</button>
+         </div>
+
+        
+        </div>
+   
+    </form> 
+    
+    <script src="index.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-auth-compat.js"></script>
+    <script>
+        const firebaseConfig = {
+          apiKey: "AIzaSyDeeqdP5trIFnXVirZL1vEcFA6X6mil5Jw",
+          authDomain: "qrcodejg.firebaseapp.com",
+          projectId: "qrcodejg",
+          storageBucket: "qrcodejg.appspot.com",
+          messagingSenderId: "583377091478",
+          appId: "1:583377091478:web:c3ec5d80ae561f76bdbbb7"
+        };
+        const app = firebase.initializeApp(firebaseConfig);
+        
+    </script>
+    
+    <!---<a href="scan.html"><input type="Button" value="Scan QR CODE"></a>-->
+
+
+    <!--<script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+      
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+          apiKey: "AIzaSyDeeqdP5trIFnXVirZL1vEcFA6X6mil5Jw",
+          authDomain: "qrcodejg.firebaseapp.com",
+          projectId: "qrcodejg",
+          storageBucket: "qrcodejg.appspot.com",
+          messagingSenderId: "583377091478",
+          appId: "1:583377091478:web:c3ec5d80ae561f76bdbbb7"
+        };
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+      </script>  
+    -->
+      
+</body>
+
+</html>

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <title>Scan</title>
+    <a href="https://www.jovensgenios.com"><img src="logo.png" alt="Logo Jovens Gênios" id="logo"></a>
+</head>
+<link rel="stylesheet" href="scan.css">
+
+
+<body>
+  
+  <!-- <script src="https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js"></script> -->
+  <!-- <script src="https://www.gstatic.com/firebasejs/9.4.0/firebase-auth.js"></script> -->
+  
+ 
+ 
+    
+    
+    <script src="html5-qrcode.min.js"></script>
+    <div class="row">
+      <div class="col">
+        <div style="width:500px;" id="reader"></div>
+      </div>
+      
+    </div>
+    <script type="text/javascript">
+    function onScanSuccess(qrCodeMessage) {
+        document.getElementById('result').innerHTML = '<span class="result">'+qrCodeMessage+'</span>';
+    }
+    function onScanError(errorMessage) {
+      //handle scan error
+    }
+    var html5QrcodeScanner = new Html5QrcodeScanner(
+        "reader", { fps: 10, qrbox: 250 });
+    html5QrcodeScanner.render(onScanSuccess, onScanError);
+    </script>
+    <br>
+    <button type="button" class="solid" id="sair">Sair</button>
+
+    
+
+    <h4>Código de Patrimônio</h4>
+    <div class="col" style="padding:30px;">     
+     <div id="result"> </div>
+    </div>
+    <!---<ul id="dadosItem">Dados do item</ul> -->
+    
+
+      
+      <h4>Insira o código de Patrimônio</h4>
+      <input id="findID" type="text">
+      <button id="find" class="solid">Procurar</button>
+  
+    
+        <h1>Dados dos Itens</h1>
+        <!-- <h3 id="findItem" type = "text">1</h3> -->
+
+        <h3 id="Item" type="text">1</h3>
+        <h3 id="Entregue" type="text">1</h3>
+        <h3 id="Armazenamento" type="text">1</h3>
+        <h3 id="CodigoDePatrimônio" type="text">1</h3>
+        <h3 id="Estado" type="text">1</h3>
+        <h3 id="MemoriaRam" type="text">1</h3>
+        <h3 id="Nserie" type="text">1</h3>
+        <h3 id="Processador" type="text">1</h3>
+        <h3 id="SistemaOperacional" type="text">1</h3>
+        <h3 id="Obs" type="text">1</h3>
+        
+
+
+    
+
+    
+  
+
+    </script>
+   
+   <!-- <script src="scan.js"></script> -->
+   
+
+  <script type="module"> 
+    import * as firebase from "https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js";
+    import {getAuth, onAuthStateChanged} from "https://www.gstatic.com/firebasejs/9.4.0/firebase-auth.js";
+
+    // import { initializeApp } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js";
+    import{getDatabase, set, get, update, remove, ref, child} 
+    from "https://www.gstatic.com/firebasejs/9.4.0/firebase-database.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDeeqdP5trIFnXVirZL1vEcFA6X6mil5Jw",
+      authDomain: "qrcodejg.firebaseapp.com",
+      databaseURL: "https://qrcodejg-default-rtdb.firebaseio.com",
+      projectId: "qrcodejg",
+      storageBucket: "qrcodejg.appspot.com",
+      messagingSenderId: "583377091478",
+      appId: "1:583377091478:web:c3ec5d80ae561f76bdbbb7"
+      };
+    
+
+    const app = firebase.initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    // redirectUser()
+     
+    const db = getDatabase(app, firebaseConfig.databaseURL);
+  
+
+    var findItem = document.querySelector("#findItem");    
+    var result = document.querySelector("#ResultCod");
+    var findID = document.querySelector("#findID");
+    var find = document.querySelector("#find");
+    var Item = document.querySelector("#Item");
+    var Entregue = document.querySelector("#Entregue");
+    var Armazenamento = document.querySelector("#Armazenamento");
+    var CodigoDePatrimonio = document.querySelector("#CodigoDePatrimônio");
+    var Estado = document.querySelector("#Estado");
+    var MemoriaRam = document.querySelector("#MemoriaRam");
+    var Nserie = document.querySelector("#Nserie");
+    var Processador = document.querySelector("#Processador");
+    var SistemaOperacional = document.querySelector("#SistemaOperacional");
+    var Obs = document.querySelector("#Obs");
+    var sair = document.querySelector("#sair");
+
+    function FindData() {
+      const dbref = ref(db);
+      console.log(dbref);
+
+      get(child(dbref, "BancoDeDados/" + findID.value))
+      .then((snapshot) => {
+        if(snapshot.exists()) {
+          console.log(snapshot)
+
+          Item.innerHTML = "Item: " + snapshot.val().Item;
+          Entregue.innerHTML = "Entregue: " + snapshot.val().Entregue;
+          Armazenamento.innerHTML = "Armazenamento: " + snapshot.val().Armazenamento;
+          CodigoDePatrimonio.innerHTML = "Código de Patrimônio: " + snapshot.val().CodigoDePatrimônio;
+          Estado.innerHTML = "Estado: " + snapshot.val().Estado;
+          MemoriaRam.innerHTML = "Memória Ram: " + snapshot.val().MemoriaRam;
+          Nserie.innerHTML = "Número de Série: " + snapshot.val().Nserie;
+          Processador.innerHTML = "Processador: " + snapshot.val().Processador;
+          SistemaOperacional.innerHTML = "Sistema Operacional: " + snapshot.val().SistemaOperacional;
+          Obs.innerHTML = "Obs: " + snapshot.val().Obs;
+          } else {
+            alert("Código não encontrado!");
+        }
+                      
+      })
+
+      .catch((error) =>{
+        alert(error)          
+      
+      })
+
+
+    }
+
+    
+    
+    find.addEventListener('click', FindData); 
+  
+    
+  
+    function logout(){
+      
+          
+       window.location.href = "index.html";
+          
+        
+      
+    }
+
+    sair.addEventListener('click', logout);
+
+    function redirectUser(){
+
+      onAuthStateChanged(auth,(user) => {
+        if (user){
+          console.log(user);
+
+        
+        } else{
+          
+          logout();
+          
+        }
+      })
+    
+}
+
+  
+  
+
+  </script>
+  <!-- <script src="auth-guard.js"></script> -->
+
+
+</body>
+</html>
