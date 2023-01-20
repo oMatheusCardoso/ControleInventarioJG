@@ -1,6 +1,6 @@
 body{
     background: white;
-    font-family: 'Baloo Chettan 2', cursive;
+    /* font-family: 'Baloo Chettan 2', cursive; */
     display: flex;
     flex-direction: column;
     align-content: center;
