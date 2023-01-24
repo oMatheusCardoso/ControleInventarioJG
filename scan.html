@@ -45,7 +45,7 @@
 
     <h4>Código de Patrimônio</h4>
     <div class="col" style="padding:30px;">     
-     <div id="result"> </div>
+     <div id="result"></div>
       
     
     </div>
@@ -69,7 +69,7 @@
         <h3 id="CodigoDePatrimonioNovo" type="text"></h3>
         <h3 id="Estado" type="text"></h3>
         <h3 id="MemoriaRam" type="text"></h3>
-        <h3 id="Nserie" type="text"></h3>
+        <h3 id="NSerie" type="text"></h3>
         <h3 id="Processador" type="text"></h3>
         <h3 id="SistemaOperacional" type="text"></h3>
         <h3 id="Obs" type="text"></h3>
@@ -85,10 +85,11 @@
    
    <script src="scan.js"></script>
    
-
+  
   <script type="module"> 
     import * as firebase from "https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js";
     import {getAuth, onAuthStateChanged} from "https://www.gstatic.com/firebasejs/9.4.0/firebase-auth.js";
+    import * as html5QrcodeScanner from "/"; 
 
     // import { initializeApp } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js";
     import{getDatabase, set, get, update, remove, ref, child} 
@@ -113,7 +114,8 @@
   
 
     var findItem = document.querySelector("#findItem");    
-    var result = document.querySelector("#ResultCod");
+    // var result = document.querySelector("#ResultCod");
+    var qrCodeMessageCod = document.querySelector("#qrCodeMessageCod");
     var findID = document.querySelector("#findID");
     var find = document.querySelector("#find");
     var Item = document.querySelector("#Item");
@@ -124,7 +126,7 @@
     var CodigoDePatrimonioNovo = document.querySelector("#CodigoDePatrimonioNovo");
     var Estado = document.querySelector("#Estado");
     var MemoriaRam = document.querySelector("#MemoriaRam");
-    var Nserie = document.querySelector("#Nserie");
+    var NSerie = document.querySelector("#NSerie");
     var Processador = document.querySelector("#Processador");
     var SistemaOperacional = document.querySelector("#SistemaOperacional");
     var Obs = document.querySelector("#Obs");
@@ -147,7 +149,7 @@
           CodigoDePatrimonioNovo.innerHTML = "Código de Patrimônio Novo: " + snapshot.val().CodigoDePatrimônioNovo;
           Estado.innerHTML = "Estado: " + snapshot.val().Estado;
           MemoriaRam.innerHTML = "Memória Ram: " + snapshot.val().MemoriaRam;
-          Nserie.innerHTML = "Número de Série: " + snapshot.val().Nserie;
+          NSerie.innerHTML = "Número de Série: " + snapshot.val().NSerie;
           Processador.innerHTML = "Processador: " + snapshot.val().Processador;
           SistemaOperacional.innerHTML = "Sistema Operacional: " + snapshot.val().SistemaOperacional;
           Obs.innerHTML = "Obs: " + snapshot.val().Obs;
@@ -197,6 +199,18 @@
       })
     
 }
+    
+    function AutoQr(){
+      if (document.getElementById('qrCodeMessage').value == !null ){
+        
+        findID(qrCodeMessage);          
+        result.addEventListener('load', findID)
+        console.log(result);
+        console.log(findID);
+          
+        }
+
+      }
 
   
   
