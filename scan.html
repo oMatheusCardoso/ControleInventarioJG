@@ -47,53 +47,25 @@
     <h3 id="Obs" type="text"></h3>
 
     <script src="html5-qrcode.min.js"></script>
-    <script type="text/javascript">
-      function onScanSuccess(qrCodeMessage) {
-        document.getElementById("result").innerHTML =
-          '<span class="result">' + qrCodeMessage + "</span>";
-      }
-      function onScanError(errorMessage) {
-        //handle scan error
-      }
-      var html5QrcodeScanner = new Html5QrcodeScanner("reader", {
-        fps: 10,
-        qrbox: 250,
-      });
-      html5QrcodeScanner.render(onScanSuccess, onScanError);
-    </script>
     <script src="scan.js"></script>
-    <script type="module">
-      import * as firebase from "https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js";
+    <script type="module" async>
       import {
-        getAuth,
+        auth,
         onAuthStateChanged,
-      } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-auth.js";
+        dbref,
+        FindData,
+      } from "./libs/firebase/index.js";
 
-      import {
-        getDatabase,
-        set,
-        get,
-        update,
-        remove,
-        ref,
-        child,
-      } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-database.js";
-
-      const firebaseConfig = {
-        apiKey: "AIzaSyDeeqdP5trIFnXVirZL1vEcFA6X6mil5Jw",
-        authDomain: "qrcodejg.firebaseapp.com",
-        databaseURL: "https://qrcodejg-default-rtdb.firebaseio.com",
-        projectId: "qrcodejg",
-        storageBucket: "qrcodejg.appspot.com",
-        messagingSenderId: "583377091478",
-        appId: "1:583377091478:web:c3ec5d80ae561f76bdbbb7",
-      };
-
-      const app = firebase.initializeApp(firebaseConfig);
-      const auth = getAuth(app);
-      // redirectUser()
-
-      const db = getDatabase(app, firebaseConfig.databaseURL);
+      function redirectUser() {
+        onAuthStateChanged(auth, (user) => {
+          if (user) {
+            console.log(user);
+          } else {
+            logout();
+          }
+        });
+      }
+      redirectUser();
 
       var findItem = document.querySelector("#findItem");
       var result = document.querySelector("#ResultCod");
@@ -117,49 +89,29 @@
       var Obs = document.querySelector("#Obs");
       var sair = document.querySelector("#sair");
 
-      function FindData() {
-        const dbref = ref(db);
-        console.log(dbref);
-
-        get(child(dbref, "BancoDeDados/" + findID.value))
-          .then((snapshot) => {
-            if (snapshot.exists()) {
-              console.log(snapshot);
-
-              Item.innerHTML = "Item: " + snapshot.val().Item;
-              Modelo.innerHTML = "Modelo: " + snapshot.val().Modelo;
-              Entregue.innerHTML = "Entregue: " + snapshot.val().Entregue;
-              Armazenamento.innerHTML =
-                "Armazenamento: " + snapshot.val().Armazenamento;
-              CodigoDePatrimonioAntigo.innerHTML =
-                "Código de Patrimônio Antigo: " +
-                snapshot.val().CodigoDePatrimônioAntigo;
-              CodigoDePatrimonioNovo.innerHTML =
-                "Código de Patrimônio Novo: " +
-                snapshot.val().CodigoDePatrimônioNovo;
-              Estado.innerHTML = "Estado: " + snapshot.val().Estado;
-              MemoriaRam.innerHTML =
-                "Memória Ram: " + snapshot.val().MemoriaRam;
-              Nserie.innerHTML = "Número de Série: " + snapshot.val().Nserie;
-              Processador.innerHTML =
-                "Processador: " + snapshot.val().Processador;
-              SistemaOperacional.innerHTML =
-                "Sistema Operacional: " + snapshot.val().SistemaOperacional;
-              Obs.innerHTML = "Obs: " + snapshot.val().Obs;
-            } else {
-              alert("Código não encontrado!");
-            }
-          })
-
-          .catch((error) => {
-            alert(error);
-          });
+      function setData(item) {
+        Item.innerHTML = "Item: " + item.Item;
+        Modelo.innerHTML = "Modelo: " + item.Modelo;
+        Entregue.innerHTML = "Entregue: " + item.Entregue;
+        Armazenamento.innerHTML = "Armazenamento: " + item.Armazenamento;
+        CodigoDePatrimonioAntigo.innerHTML =
+          "Código de Patrimônio Antigo: " + item.CodigoDePatrimônioAntigo;
+        CodigoDePatrimonioNovo.innerHTML =
+          "Código de Patrimônio Novo: " + item.CodigoDePatrimônioNovo;
+        Estado.innerHTML = "Estado: " + item.Estado;
+        MemoriaRam.innerHTML = "Memória Ram: " + item.MemoriaRam;
+        Nserie.innerHTML = "Número de Série: " + item.Nserie;
+        Processador.innerHTML = "Processador: " + item.Processador;
+        SistemaOperacional.innerHTML =
+          "Sistema Operacional: " + item.SistemaOperacional;
+        Obs.innerHTML = "Obs: " + item.Obs;
       }
 
       function onScanSuccess(qrCodeMessage) {
         document.getElementById("result").innerHTML =
           '<span class="result">' + qrCodeMessage + "</span>";
-        FindData(qrCodeMessage);
+        const item = FindData(qrCodeMessage);
+        setData(item);
       }
       function onScanError(errorMessage) {
         //handle scan error
@@ -170,24 +122,16 @@
       });
       html5QrcodeScanner.render(onScanSuccess, onScanError);
 
-      find.addEventListener("click", FindData);
+      find.addEventListener("click", async () => {
+        const item = await FindData(findID.value);
+        setData(item);
+      });
 
       function logout() {
         window.location.href = "index.html";
       }
 
       sair.addEventListener("click", logout);
-
-      //TODO: Force Logout
-      function redirectUser() {
-        onAuthStateChanged(auth, (user) => {
-          if (user) {
-            console.log(user);
-          } else {
-            logout();
-          }
-        });
-      }
     </script>
   </body>
 </html>
