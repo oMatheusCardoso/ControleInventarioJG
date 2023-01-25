@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
     <title>Scan</title>
-    <a href="https://www.jovensgenios.com">
+    <a href="home.html">
       <img src="logo.png" alt="Logo Jovens Gênios" id="logo" />
     </a>
   </head>
@@ -107,10 +107,10 @@
         Obs.innerHTML = "Obs: " + item.Obs;
       }
 
-      function onScanSuccess(qrCodeMessage) {
+      async function onScanSuccess(qrCodeMessage) {
         document.getElementById("result").innerHTML =
           '<span class="result">' + qrCodeMessage + "</span>";
-        const item = FindData(qrCodeMessage);
+        const item = await FindData(qrCodeMessage);
         setData(item);
       }
       function onScanError(errorMessage) {
@@ -128,8 +128,12 @@
       });
 
       function logout() {
-        window.location.href = "index.html";
-      }
+      auth.signOut().then(() => {
+          window.location.href = "index.html";
+      }).catch(() => {
+          alert('Erro ao fazer logout!')
+    });
+}
 
       sair.addEventListener("click", logout);
     </script>

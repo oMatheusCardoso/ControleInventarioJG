@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <title>home</title>
+</head>
+<body>
+    <button type="button" class="solid" id="sair">Sair</button>
+    <a type="button" class="solid" href="scan.html"><button>Equipamentos de TI</button></a>
+    <a type="button" class="solid" href="scanAll.html"><button>Geral</button></a>
+    
+    <h1>Dashboard Total</h1>
+
+
+<script type="module" async>
+import {
+    auth,
+    onAuthStateChanged,
+    dbref,
+    FindData,
+} from "./libs/firebase/index.js";
+
+function redirectUser() {
+    onAuthStateChanged(auth, (user) => {
+    if (user) {
+        console.log(user);
+    } else {
+        logout();
+    }
+    });
+}
+
+redirectUser();
+
+function logout() {
+    auth.signOut().then(() => {
+        window.location.href = "index.html";
+    }).catch(() => {
+        alert('Erro ao fazer logout!')
+    });
+    }
+
+sair.addEventListener("click", logout);
+
+</script>
+
+</body>
+</html>

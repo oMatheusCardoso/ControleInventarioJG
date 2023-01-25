@@ -8,7 +8,7 @@ import {
 	getDatabase, 
 	ref, 
 	get,
-	child
+	child,
 } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-database.js";
 
 const firebaseConfig = {
@@ -28,7 +28,6 @@ const db = getDatabase(app, firebaseConfig.databaseURL);
 const dbref = ref(db);
 
 function FindData(code) {
-	console.log("code");
 	const data = get(child(dbref, "BancoDeDados/" + code.trim()))
 		.then((snapshot) => {
 			if (snapshot.exists()) {
