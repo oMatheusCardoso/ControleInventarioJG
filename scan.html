@@ -1,209 +1,179 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
     <title>Scan</title>
-    <a href="https://www.jovensgenios.com"><img src="logo.png" alt="Logo Jovens Gênios" id="logo"></a>
-</head>
-<link rel="stylesheet" href="scan.css">
+    <a href="https://www.jovensgenios.com"
+      ><img src="logo.png" alt="Logo Jovens Gênios" id="logo"
+    /></a>
+  </head>
+  <link rel="stylesheet" href="scan.css" />
 
-
-<body>
-  
-  <!-- <script src="https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js"></script> -->
-  <!-- <script src="https://www.gstatic.com/firebasejs/9.4.0/firebase-auth.js"></script> -->
-  
- 
- 
-    
-    
-    <script src="html5-qrcode.min.js"></script>
+  <body>
     <div class="row">
       <div class="col">
-        <div style="width:500px;" id="reader"></div>
+        <div style="width: 500px" id="reader"></div>
       </div>
-      
     </div>
-    <script type="text/javascript">
-    function onScanSuccess(qrCodeMessage) {
-        document.getElementById('result').innerHTML = '<span class="result">'+qrCodeMessage+'</span>';
-    }
-    function onScanError(errorMessage) {
-      //handle scan error
-    }
-    var html5QrcodeScanner = new Html5QrcodeScanner(
-        "reader", { fps: 10, qrbox: 250 });
-    html5QrcodeScanner.render(onScanSuccess, onScanError);
-    </script>
-    <br>
+
+    <br />
     <button type="button" class="solid" id="sair">Sair</button>
 
-    
-
     <h4>Código de Patrimônio</h4>
-    <div class="col" style="padding:30px;">     
-     <div id="result"> </div>
-      
-    
+    <div class="col" style="padding: 30px">
+      <div id="result"></div>
     </div>
-    <!---<ul id="dadosItem">Dados do item</ul> -->
-    
 
-      
-      <h4>Insira o código de Patrimônio</h4>
-      <input id="findID" type="text">
-      <button id="find" class="solid">Procurar</button>
-  
-    
-        <h1>Dados dos Itens</h1>
-        <!-- <h3 id="findItem" type = "text">1</h3> -->
+    <h4>Insira o código de Patrimônio</h4>
+    <input id="findID" type="text" />
+    <button id="find" class="solid">Procurar</button>
 
-        <h3 id="Item" type="text"></h3>
-        <h3 id="Modelo" type="text"></h3>
-        <h3 id="Entregue" type="text"></h3>
-        <h3 id="Armazenamento" type="text"></h3>
-        <h3 id="CodigoDePatrimonioAntigo" type="text"></h3>
-        <h3 id="CodigoDePatrimonioNovo" type="text"></h3>
-        <h3 id="Estado" type="text"></h3>
-        <h3 id="MemoriaRam" type="text"></h3>
-        <h3 id="Nserie" type="text"></h3>
-        <h3 id="Processador" type="text"></h3>
-        <h3 id="SistemaOperacional" type="text"></h3>
-        <h3 id="Obs" type="text"></h3>
-        
+    <h1>Dados dos Itens</h1>
 
+    <h3 id="Item" type="text"></h3>
+    <h3 id="Modelo" type="text"></h3>
+    <h3 id="Entregue" type="text"></h3>
+    <h3 id="Armazenamento" type="text"></h3>
+    <h3 id="CodigoDePatrimonioAntigo" type="text"></h3>
+    <h3 id="CodigoDePatrimonioNovo" type="text"></h3>
+    <h3 id="Estado" type="text"></h3>
+    <h3 id="MemoriaRam" type="text"></h3>
+    <h3 id="Nserie" type="text"></h3>
+    <h3 id="Processador" type="text"></h3>
+    <h3 id="SistemaOperacional" type="text"></h3>
+    <h3 id="Obs" type="text"></h3>
 
-    
-
-    
-  
-
+    <script src="html5-qrcode.min.js"></script>
+    <script type="text/javascript">
+      function onScanSuccess(qrCodeMessage) {
+        document.getElementById("result").innerHTML =
+          '<span class="result">' + qrCodeMessage + "</span>";
+      }
+      function onScanError(errorMessage) {
+        //handle scan error
+      }
+      var html5QrcodeScanner = new Html5QrcodeScanner("reader", {
+        fps: 10,
+        qrbox: 250,
+      });
+      html5QrcodeScanner.render(onScanSuccess, onScanError);
     </script>
-   
-   <script src="scan.js"></script>
-   
+    <script src="scan.js"></script>
+    <script type="module">
+      import * as firebase from "https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js";
+      import {
+        getAuth,
+        onAuthStateChanged,
+      } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-auth.js";
 
-  <script type="module"> 
-    import * as firebase from "https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js";
-    import {getAuth, onAuthStateChanged} from "https://www.gstatic.com/firebasejs/9.4.0/firebase-auth.js";
+      import {
+        getDatabase,
+        set,
+        get,
+        update,
+        remove,
+        ref,
+        child,
+      } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-database.js";
 
-    // import { initializeApp } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js";
-    import{getDatabase, set, get, update, remove, ref, child} 
-    from "https://www.gstatic.com/firebasejs/9.4.0/firebase-database.js";
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyDeeqdP5trIFnXVirZL1vEcFA6X6mil5Jw",
-      authDomain: "qrcodejg.firebaseapp.com",
-      databaseURL: "https://qrcodejg-default-rtdb.firebaseio.com",
-      projectId: "qrcodejg",
-      storageBucket: "qrcodejg.appspot.com",
-      messagingSenderId: "583377091478",
-      appId: "1:583377091478:web:c3ec5d80ae561f76bdbbb7"
+      const firebaseConfig = {
+        apiKey: "AIzaSyDeeqdP5trIFnXVirZL1vEcFA6X6mil5Jw",
+        authDomain: "qrcodejg.firebaseapp.com",
+        databaseURL: "https://qrcodejg-default-rtdb.firebaseio.com",
+        projectId: "qrcodejg",
+        storageBucket: "qrcodejg.appspot.com",
+        messagingSenderId: "583377091478",
+        appId: "1:583377091478:web:c3ec5d80ae561f76bdbbb7",
       };
-    
 
-    const app = firebase.initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    // redirectUser()
-     
-    const db = getDatabase(app, firebaseConfig.databaseURL);
-  
+      const app = firebase.initializeApp(firebaseConfig);
+      const auth = getAuth(app);
+      // redirectUser()
 
-    var findItem = document.querySelector("#findItem");    
-    var result = document.querySelector("#ResultCod");
-    var findID = document.querySelector("#findID");
-    var find = document.querySelector("#find");
-    var Item = document.querySelector("#Item");
-    var Modelo = document.querySelector("#Modelo");
-    var Entregue = document.querySelector("#Entregue");
-    var Armazenamento = document.querySelector("#Armazenamento");
-    var CodigoDePatrimonioAntigo = document.querySelector("#CodigoDePatrimonioAntigo");
-    var CodigoDePatrimonioNovo = document.querySelector("#CodigoDePatrimonioNovo");
-    var Estado = document.querySelector("#Estado");
-    var MemoriaRam = document.querySelector("#MemoriaRam");
-    var Nserie = document.querySelector("#Nserie");
-    var Processador = document.querySelector("#Processador");
-    var SistemaOperacional = document.querySelector("#SistemaOperacional");
-    var Obs = document.querySelector("#Obs");
-    var sair = document.querySelector("#sair");
+      const db = getDatabase(app, firebaseConfig.databaseURL);
 
-    function FindData() {
-      const dbref = ref(db);
-      console.log(dbref);
+      var findItem = document.querySelector("#findItem");
+      var result = document.querySelector("#ResultCod");
+      var findID = document.querySelector("#findID");
+      var find = document.querySelector("#find");
+      var Item = document.querySelector("#Item");
+      var Modelo = document.querySelector("#Modelo");
+      var Entregue = document.querySelector("#Entregue");
+      var Armazenamento = document.querySelector("#Armazenamento");
+      var CodigoDePatrimonioAntigo = document.querySelector(
+        "#CodigoDePatrimonioAntigo"
+      );
+      var CodigoDePatrimonioNovo = document.querySelector(
+        "#CodigoDePatrimonioNovo"
+      );
+      var Estado = document.querySelector("#Estado");
+      var MemoriaRam = document.querySelector("#MemoriaRam");
+      var Nserie = document.querySelector("#Nserie");
+      var Processador = document.querySelector("#Processador");
+      var SistemaOperacional = document.querySelector("#SistemaOperacional");
+      var Obs = document.querySelector("#Obs");
+      var sair = document.querySelector("#sair");
 
-      get(child(dbref, "BancoDeDados/" + findID.value))
-      .then((snapshot) => {
-        if(snapshot.exists()) {
-          console.log(snapshot)
+      function FindData() {
+        const dbref = ref(db);
+        console.log(dbref);
 
-          Item.innerHTML = "Item: " + snapshot.val().Item;
-          Modelo.innerHTML = "Modelo: " + snapshot.val().Modelo;
-          Entregue.innerHTML = "Entregue: " + snapshot.val().Entregue;
-          Armazenamento.innerHTML = "Armazenamento: " + snapshot.val().Armazenamento;
-          CodigoDePatrimonioAntigo.innerHTML = "Código de Patrimônio Antigo: " + snapshot.val().CodigoDePatrimônioAntigo;
-          CodigoDePatrimonioNovo.innerHTML = "Código de Patrimônio Novo: " + snapshot.val().CodigoDePatrimônioNovo;
-          Estado.innerHTML = "Estado: " + snapshot.val().Estado;
-          MemoriaRam.innerHTML = "Memória Ram: " + snapshot.val().MemoriaRam;
-          Nserie.innerHTML = "Número de Série: " + snapshot.val().Nserie;
-          Processador.innerHTML = "Processador: " + snapshot.val().Processador;
-          SistemaOperacional.innerHTML = "Sistema Operacional: " + snapshot.val().SistemaOperacional;
-          Obs.innerHTML = "Obs: " + snapshot.val().Obs;
+        get(child(dbref, "BancoDeDados/" + findID.value))
+          .then((snapshot) => {
+            if (snapshot.exists()) {
+              console.log(snapshot);
+
+              Item.innerHTML = "Item: " + snapshot.val().Item;
+              Modelo.innerHTML = "Modelo: " + snapshot.val().Modelo;
+              Entregue.innerHTML = "Entregue: " + snapshot.val().Entregue;
+              Armazenamento.innerHTML =
+                "Armazenamento: " + snapshot.val().Armazenamento;
+              CodigoDePatrimonioAntigo.innerHTML =
+                "Código de Patrimônio Antigo: " +
+                snapshot.val().CodigoDePatrimônioAntigo;
+              CodigoDePatrimonioNovo.innerHTML =
+                "Código de Patrimônio Novo: " +
+                snapshot.val().CodigoDePatrimônioNovo;
+              Estado.innerHTML = "Estado: " + snapshot.val().Estado;
+              MemoriaRam.innerHTML =
+                "Memória Ram: " + snapshot.val().MemoriaRam;
+              Nserie.innerHTML = "Número de Série: " + snapshot.val().Nserie;
+              Processador.innerHTML =
+                "Processador: " + snapshot.val().Processador;
+              SistemaOperacional.innerHTML =
+                "Sistema Operacional: " + snapshot.val().SistemaOperacional;
+              Obs.innerHTML = "Obs: " + snapshot.val().Obs;
+            } else {
+              alert("Código não encontrado!");
+            }
+          })
+
+          .catch((error) => {
+            alert(error);
+          });
+      }
+
+      find.addEventListener("click", FindData);
+
+      function logout() {
+        window.location.href = "index.html";
+      }
+
+      sair.addEventListener("click", logout);
+
+      //TODO: Force Logout
+      function redirectUser() {
+        onAuthStateChanged(auth, (user) => {
+          if (user) {
+            console.log(user);
           } else {
-            alert("Código não encontrado!");
-        }
-                      
-      })
-
-      .catch((error) =>{
-        alert(error)          
-      
-      })
-
-
-    }
-
-    
-    
-    find.addEventListener('click', FindData); 
-  
-    
-  
-    function logout(){
-      
-          
-       window.location.href = "index.html";
-          
-        
-      
-    }
-
-    sair.addEventListener('click', logout);
-
-    function redirectUser(){
-
-      onAuthStateChanged(auth,(user) => {
-        if (user){
-          console.log(user);
-
-        
-        } else{
-          
-          logout();
-          
-        }
-      })
-    
-}
-
-  
-  
-
-  </script>
-  <!-- <script src="auth-guard.js"></script> -->
-
-
-</body>
+            logout();
+          }
+        });
+      }
+    </script>
+  </body>
 </html>
