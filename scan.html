@@ -35,7 +35,7 @@
 
     <h3 id="Item" type="text"></h3>
     <h3 id="Modelo" type="text"></h3>
-    <h3 id="Entregue" type="text"></h3>
+    <h3 id="UserAtual" type="text"></h3>
     <h3 id="Armazenamento" type="text"></h3>
     <h3 id="CodigoDePatrimonioAntigo" type="text"></h3>
     <h3 id="CodigoDePatrimonioNovo" type="text"></h3>
@@ -44,6 +44,12 @@
     <h3 id="Nserie" type="text"></h3>
     <h3 id="Processador" type="text"></h3>
     <h3 id="SistemaOperacional" type="text"></h3>
+    <h3 id="UserAnterior" type="text"></h3>
+    <h3 id="CodCarregador" type="text"></h3>
+    <h3 id="ValorCompra" type="text"></h3>
+    <h3 id="DataCompra" type="text"></h3>
+    <h3 id="Depreciacao" type="text"></h3>
+    <h3 id="NotaFiscal" type="text">Clique Aqui</h3>
     <h3 id="Obs" type="text"></h3>
 
     <script src="html5-qrcode.min.js"></script>
@@ -65,7 +71,7 @@
           }
         });
       }
-      redirectUser();
+      // redirectUser();
 
       var findItem = document.querySelector("#findItem");
       var result = document.querySelector("#ResultCod");
@@ -73,7 +79,7 @@
       var find = document.querySelector("#find");
       var Item = document.querySelector("#Item");
       var Modelo = document.querySelector("#Modelo");
-      var Entregue = document.querySelector("#Entregue");
+      var UserAtual = document.querySelector("#UserAtual");
       var Armazenamento = document.querySelector("#Armazenamento");
       var CodigoDePatrimonioAntigo = document.querySelector(
         "#CodigoDePatrimonioAntigo"
@@ -86,13 +92,19 @@
       var Nserie = document.querySelector("#Nserie");
       var Processador = document.querySelector("#Processador");
       var SistemaOperacional = document.querySelector("#SistemaOperacional");
+      var UserAnterior = document.querySelector("#UserAnterior");
+      var CodCarregador = document.querySelector("#CodCarregador");
+      var ValorCompra= document.querySelector("#ValorCompra");
+      var DataCompra = document.querySelector("#DataCompra"); 
+      var Depreciacao = document.querySelector("#Depreciacao");
+      var NotaFiscal = document.querySelector("#NotaFiscal");
       var Obs = document.querySelector("#Obs");
       var sair = document.querySelector("#sair");
 
       function setData(item) {
         Item.innerHTML = "Item: " + item.Item;
         Modelo.innerHTML = "Modelo: " + item.Modelo;
-        Entregue.innerHTML = "Entregue: " + item.Entregue;
+        UserAtual.innerHTML = "Usuário Atual: " + item.UserAtual;
         Armazenamento.innerHTML = "Armazenamento: " + item.Armazenamento;
         CodigoDePatrimonioAntigo.innerHTML =
           "Código de Patrimônio Antigo: " + item.CodigoDePatrimônioAntigo;
@@ -104,6 +116,18 @@
         Processador.innerHTML = "Processador: " + item.Processador;
         SistemaOperacional.innerHTML =
           "Sistema Operacional: " + item.SistemaOperacional;
+        UserAnterior.innerHTML =
+          "Sistema Operacional: " + item.UserAnterior;
+        CodCarregador.innerHTML =
+          "Carregador Usado: " + item.CodCarregador;
+        ValorCompra.innerHTML =
+          "Valor do item: " + item.ValorCompra;
+        DataCompra.innerHTML =
+          "Data da Compra: " + item.DataCompra;
+        Depreciacao.innerHTML =
+          "Depreciação Atual: " + item.Depreciacao;
+        NotaFiscal.innerHTML =
+          "Nota Fiscal: " + item.NotaFiscal;
         Obs.innerHTML = "Obs: " + item.Obs;
       }
 
