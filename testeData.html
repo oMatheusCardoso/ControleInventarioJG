@@ -7,15 +7,42 @@
     <title>Teste Data</title>
 </head>
 <body>
+
 <h3 id="data"></h3>
 
 
 <script>
 
 
+function getMonths(){
+    var dataCompra = new Date(2022, 9, 3);
+    var today = new Date();
+    var meses = 0;
+        meses = (today.getFullYear() - dataCompra.getFullYear()) * 12;   
+    meses = meses - dataCompra.getMonth();
+    meses = meses + today.getMonth();
+    return meses;   
+    
+}
+
+var depre = 4410.90 * 0.2 / 12; //Valor mensal
+
+function calc(){
+    var somaMeses = depre * getMonths();
+    var depreCalc = 4410.90 - somaMeses;
+
+    console.log(depreCalc);
+
+}
+
+
+
+
+getMonths();
+calc();
 
 const date = new Date();
-console.log(date);
+// console.log(date);
 
 const options = {
     year: "numeric",
@@ -26,11 +53,12 @@ const options = {
 
 const actual = date.toLocaleDateString("pt-br", options)
 data.setAttribute("h3", actual);
-console.log(actual);
+// console.log(actual);
 
 
 
 </script>
+
 
 
 

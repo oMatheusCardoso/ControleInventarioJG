@@ -46,7 +46,7 @@
     <h3 id="SistemaOperacional" type="text"></h3>
     <h3 id="UserAnterior" type="text"></h3>
     <h3 id="CodCarregador" type="text"></h3>
-    <h3 id="ValorCompra" type="text"></h3>
+    <h3 id="ValorCompra" type="float"></h3>
     <h3 id="DataCompra" type="text"></h3>
     <h3 id="Depreciacao" type="text"></h3>
     <h3 id="NotaFiscal" type="text"></h3>    
@@ -63,6 +63,12 @@
         FindData,
       } from "./libs/firebase/index.js";
 
+      import { 
+        getMonths,
+        calc,
+        formatCurrency,
+      } from "./utils/calcDepreciation.js";
+
       function redirectUser() {
         onAuthStateChanged(auth, (user) => {
           if (user) {
@@ -73,6 +79,8 @@
         });
       }
       // redirectUser();  //DESATIVADO PARA MELHOR TESTE
+
+      
 
       var VisuNota = document.querySelector("#VisuNota");
       var ButtonNfe = document.querySelector("#ButtonNfe");
@@ -106,6 +114,11 @@
       var item = document.querySelector("#item");
 
       function setData(item) {
+
+        getMonths(item.DataCompra);
+        calc(item.ValorCompra, item.DataCompra);
+        
+
         Item.innerHTML = "Item: " + item.Item;
         Modelo.innerHTML = "Modelo: " + item.Modelo;
         UserAtual.innerHTML = "Usuário Atual: " + item.UserAtual;
@@ -125,18 +138,19 @@
         CodCarregador.innerHTML =
           "Carregador Usado: " + item.CodCarregador;
         ValorCompra.innerHTML =
-          "Valor do item: " + item.ValorCompra;
+          "Valor do item: " + formatCurrency(item.ValorCompra);
         DataCompra.innerHTML =
           "Data da Compra: " + item.DataCompra;
         Depreciacao.innerHTML =
-          "Depreciação Atual: " + item.ValorCompra * (20/100) / 12;
-        // Depreciacao.innerHTML =
-        //   "Depreciação Atual: " + item.Depreciacao;
-        Obs.innerHTML = "Obs: " + item.Obs;     
+          "Depreciação Atual: " + calc(item.ValorCompra, item.DataCompra);
+        Obs.innerHTML = "Obs: " + item.Obs;    
 
         VisuNota.setAttribute("href", item.NotaFiscal);
       }
 
+      
+
+      
       async function onScanSuccess(qrCodeMessage) {
         document.getElementById("result").innerHTML =
           '<span class="result">' + qrCodeMessage + "</span>";
