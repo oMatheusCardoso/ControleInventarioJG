@@ -49,7 +49,8 @@
     <h3 id="ValorCompra" type="text"></h3>
     <h3 id="DataCompra" type="text"></h3>
     <h3 id="Depreciacao" type="text"></h3>
-    <h3 id="NotaFiscal" type="text">Clique Aqui</h3>
+    <h3 id="NotaFiscal" type="text"></h3>    
+    <a id= "VisuNota" href=""><button>Visualizar Nota Fiscal</button></a>
     <h3 id="Obs" type="text"></h3>
 
     <script src="html5-qrcode.min.js"></script>
@@ -71,8 +72,10 @@
           }
         });
       }
-      // redirectUser();
+      // redirectUser();  //DESATIVADO PARA MELHOR TESTE
 
+      var VisuNota = document.querySelector("#VisuNota");
+      var ButtonNfe = document.querySelector("#ButtonNfe");
       var findItem = document.querySelector("#findItem");
       var result = document.querySelector("#ResultCod");
       var findID = document.querySelector("#findID");
@@ -100,6 +103,7 @@
       var NotaFiscal = document.querySelector("#NotaFiscal");
       var Obs = document.querySelector("#Obs");
       var sair = document.querySelector("#sair");
+      var item = document.querySelector("#item");
 
       function setData(item) {
         Item.innerHTML = "Item: " + item.Item;
@@ -107,9 +111,9 @@
         UserAtual.innerHTML = "Usuário Atual: " + item.UserAtual;
         Armazenamento.innerHTML = "Armazenamento: " + item.Armazenamento;
         CodigoDePatrimonioAntigo.innerHTML =
-          "Código de Patrimônio Antigo: " + item.CodigoDePatrimônioAntigo;
+          "Código de Patrimônio Antigo: " + item.CodigoDePatrimonioAntigo;
         CodigoDePatrimonioNovo.innerHTML =
-          "Código de Patrimônio Novo: " + item.CodigoDePatrimônioNovo;
+          "Código de Patrimônio Novo: " + item.CodigoDePatrimonioNovo;
         Estado.innerHTML = "Estado: " + item.Estado;
         MemoriaRam.innerHTML = "Memória Ram: " + item.MemoriaRam;
         Nserie.innerHTML = "Número de Série: " + item.Nserie;
@@ -117,7 +121,7 @@
         SistemaOperacional.innerHTML =
           "Sistema Operacional: " + item.SistemaOperacional;
         UserAnterior.innerHTML =
-          "Sistema Operacional: " + item.UserAnterior;
+          "Usuários Anteriores: " + item.UserAnterior;
         CodCarregador.innerHTML =
           "Carregador Usado: " + item.CodCarregador;
         ValorCompra.innerHTML =
@@ -125,10 +129,12 @@
         DataCompra.innerHTML =
           "Data da Compra: " + item.DataCompra;
         Depreciacao.innerHTML =
-          "Depreciação Atual: " + item.Depreciacao;
-        NotaFiscal.innerHTML =
-          "Nota Fiscal: " + item.NotaFiscal;
-        Obs.innerHTML = "Obs: " + item.Obs;
+          "Depreciação Atual: " + item.ValorCompra * (20/100) / 12;
+        // Depreciacao.innerHTML =
+        //   "Depreciação Atual: " + item.Depreciacao;
+        Obs.innerHTML = "Obs: " + item.Obs;     
+
+        VisuNota.setAttribute("href", item.NotaFiscal);
       }
 
       async function onScanSuccess(qrCodeMessage) {
@@ -159,6 +165,7 @@
     });
 }
 
+      
       sair.addEventListener("click", logout);
     </script>
   </body>
