@@ -7,11 +7,10 @@
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <title>Controle de TI</title>
 </head>
-
-<link rel="stylesheet" href="index.css">
-<head>
-  <a href="https://www.jovensgenios.com"><img src="logo.png" alt="Logo Jovens Gênios" ></a>
-
+<link rel="stylesheet" href="./css/css-global.css"/>
+<link rel="stylesheet" href="./css/index.css">
+<head id="logo">
+<a href="https://www.jovensgenios.com"><img src="logo.png" alt="Logo Jovens Gênios" ></a>
 </head>
 
 <body>
@@ -28,26 +27,24 @@
             <input type="email" name="email" id="email" onchange="onChangeEmail()"  placeholder="jovens.genios@jovensgenios.com">
             <div class="Error" id="email-necessario">Email obrigatório</div>
             <div class="Error" id="email-senha-incorreta">Email ou senha incorreta</div>
-         </div>
+        </div>
             
-         <div>
+        <div>
             <div><label for="Senha"></label>Senha</div>
             <input type="password" name="password" id="password" onchange="onChangePassword()" placeholder="Senha">    
             <div class="Error" id="senha-necessaria">Senha obrigatória</div>
-                   
-         </div>
+        </div>
 
-         <div>
+        <div>
             <button type="button" id="entrar" class="solid" onclick="login()" >Entrar</button>
-         </div>
+        </div>
 
-         <div>
+        <div>
             <button type="button" id="recuperar" class="clear" >Recuperar Senha</button>
-         </div>
+        </div>
 
         
         </div>
-   
     </form> 
     
     <script src="index.js"></script>

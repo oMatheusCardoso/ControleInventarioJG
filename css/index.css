@@ -1,13 +1,3 @@
-body{
-    background: white;
-    font-family: 'Baloo Chettan 2', cursive;
-    display: flex;
-    flex-direction: column;
-    align-content: center;
-    justify-content:center;
-    align-items: center;
-    height: 100vh;
-}
 
 input{
     border: 2px rounded black;
@@ -31,12 +21,12 @@ input, button{
 }
 button{
     cursor: pointer;
-   width: 80%;
-   margin-left: 10%;
-   margin-top: 30px;
-   display: flex;
-   flex-direction: column;
-   align-items: center;
+    width: 80%;
+    margin-left: 10%;
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 button:active{
     opacity: 0.8;

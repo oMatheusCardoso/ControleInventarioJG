@@ -1,0 +1,24 @@
+#logo{
+
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content:center;
+    align-items: center;
+    height: 15fr;
+    width: 100%;
+
+}
+
+body{
+    background: white;
+    font-family: 'Nunito', sans-serif;
+    /* font-family: 'Baloo Chettan 2', cursive; */
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content:center;
+    align-items: center;
+    height: 15fr;
+}
+

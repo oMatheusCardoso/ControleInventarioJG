@@ -6,11 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
     <title>Scan</title>
-    <a href="home.html">
-      <img src="logo.png" alt="Logo Jovens Gênios" id="logo" />
-    </a>
+  
   </head>
-  <link rel="stylesheet" href="scan.css" />
+
+  <div id="logo">
+    <a id="logo" href="https://www.jovensgenios.com"><img src="logo.png" alt="Logo Jovens Gênios" ></a>
+  </div>
+
+  <link rel="stylesheet" href="./css/css-global.css"/>
+  <link rel="stylesheet" href="./css/scan.css" />
 
   <body>
     <div class="row">
@@ -21,6 +25,8 @@
 
     <br />
     <button type="button" class="solid" id="sair">Sair</button>
+    <a href="home.html"><button type="button" class="solid" id="backToHome">Voltar</button></a>
+    
 
     <h4>Código de Patrimônio</h4>
     <div class="col" style="padding: 30px">
@@ -30,6 +36,8 @@
     <h4>Insira o código de Patrimônio</h4>
     <input id="findID" type="text" />
     <button id="find" class="solid">Procurar</button>
+
+    <div id="dadosItens">
 
     <h1>Dados dos Itens</h1>
 
@@ -50,9 +58,9 @@
     <h3 id="DataCompra" type="text"></h3>
     <h3 id="Depreciacao" type="text"></h3>
     <h3 id="NotaFiscal" type="text"></h3>    
-    <a id= "VisuNota" href=""><button>Visualizar Nota Fiscal</button></a>
+    <a id= "VisuNota" target="_blank" href=""><button>Visualizar Nota Fiscal</button></a>
     <h3 id="Obs" type="text"></h3>
-
+    </div>
     <script src="html5-qrcode.min.js"></script>
     <script src="scan.js"></script>
     <script type="module" async>
@@ -146,6 +154,12 @@
         Obs.innerHTML = "Obs: " + item.Obs;    
 
         VisuNota.setAttribute("href", item.NotaFiscal);
+
+        if (VisuNota != null) {
+          
+            VisuNota.style.display="flex";
+
+        };
       }
 
       
@@ -169,6 +183,7 @@
       find.addEventListener("click", async () => {
         const item = await FindData(findID.value);
         setData(item);
+        
       });
 
       function logout() {
