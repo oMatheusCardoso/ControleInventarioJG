@@ -1,0 +1,42 @@
+{
+  "Material":{
+      "Inventário Brindes": "Item",
+      "a": "Tipo",
+      "__1": "Material",
+      "__2": "Arte",
+      "__3": "Quantidade",
+      "__4": "Obs"
+    },
+  "Polimero":{
+      "Inventário Brindes": "Caneca Plei",
+      "a": "Caneca",
+      "__1": "Polímero",
+      "__2": "Plei 2022",
+      "__3": 0,
+      "__4": ""
+    },
+  "Variado":{
+      "Inventário Brindes": "Kit Mega Professor",
+      "a": "Kit",
+      "__1": "Variado",
+      "__2": "Mega 2023",
+      "__3": 0,
+      "__4": "Sacochila que contém caneca, caneta e blusa"
+    },
+  "Plastico":{
+      "Inventário Brindes": "Caneta Mega",
+      "a": "Caneta",
+      "__1": "Plastico",
+      "__2": "Mega 2023",
+      "__3": 0,
+      "__4": ""
+    },
+  "test":{
+      "Inventário Brindes": "Coloquei essas informações só para exemplo, podem apagar para colocar as corretas",
+      "a": "j",
+      "__1": "j",
+      "__2": "j",
+      "__3": "j",
+      "__4": "s"
+    }
+}

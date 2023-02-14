@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <title>Brindes</title>
+  
+  </head>
+
+  <div id="logo">
+    <a id="logo" href="home.html"><img src="logo.png" alt="Logo Jovens Gênios" ></a>
+  </div>
+
+  <link rel="stylesheet" href="./css/css-global.css"/>
+
+
+  <body>
+    <button type="button" class="solid" id="sair">Sair</button>
+    <a href="home.html"><button type="button" class="solid" id="backToHome">Voltar</button></a>
+    <h3>Controle de Brindes</h3> 
+
+    <h4>Insira o código de Patrimônio</h4>
+    <input id="findID" type="text" />
+    <button id="find" class="solid">Procurar</button>
+
+    <div id="dadosItens">
+
+    <h1>Dados dos Itens</h1>
+
+    <h3 id="Item" type="text"></h3>
+    <h3 id="Tipo" type="text"></h3>
+    <h3 id="Material" type="text"></h3>
+    <h3 id="Arte" type="text"></h3>
+    <h3 id="Quantidade" type="text"></h3>
+    <h3 id="DataCompra" type="text"></h3>
+    <a id= "VisuNota" target="_blank" href=""><button>Visualizar Nota Fiscal</button></a>
+    <h3 id="Obs" type="text"></h3>
+    </div>
+
+    <script src="scan.js"></script>
+    <script type="module" async>
+      import {
+        auth,
+        onAuthStateChanged,
+        dbref,
+        FindData,
+      } from "./libs/firebase/index-brindes.js";
+
+      import { 
+        getMonths,
+        calc,
+        formatCurrency,
+      } from "./utils/calcDepreciation.js";
+
+      function redirectUser() {
+        onAuthStateChanged(auth, (user) => {
+          if (user) {
+            console.log(user);
+          } else {
+            logout();
+          }
+        });
+      }
+      // redirectUser();  //DESATIVADO PARA MELHOR TESTE
+
+      var Tipo = document.querySelector("#Tipo");
+      var Material = document.querySelector("#Material");
+      var Arte = document.querySelector("#Arte");
+      var Quantidade = document.querySelector("#Quantidade");
+      var DataCompra = document.querySelector("#Item");
+      var VisuNota = document.querySelector("#Modelo");
+      var Obs = document.querySelector("#UserAtual");
+
+      function setData(item) {
+      
+
+        getMonths(item.DataCompra);
+        calc(item.ValorCompra, item.DataCompra);
+        
+
+        Tipo.innerHTML = "Tipo: " + item.Tipo;
+        Material.innerHTML = "Material: " + item.Material;
+        Arte.innerHTML = "Arte: " + item.Arte;
+        Quantidade.innerHTML = "Quantidade: " + item.Quantidade;
+        DataCompra.innerHTML =
+        "DataCompra: " + item.DataCompra;
+        VisuNota.innerHTML =
+        "VisuNota: " + item.VisuNota;
+        Obs.innerHTML = "Obs: " + item.Obs;
+        VisuNota.setAttribute("href", item.NotaFiscal);
+
+        if (VisuNota != null) {
+          
+            VisuNota.style.display="flex";
+
+        };
+      }
+
+      find.addEventListener("click", async () => {
+        const item = await FindData(findID.value);
+        setData(item);
+        
+      });
+
+      
+      
+      function logout() {
+      auth.signOut().then(() => {
+          window.location.href = "index.html";
+      }).catch(() => {
+          alert('Erro ao fazer logout!')
+    });
+}
+
+      
+      sair.addEventListener("click", logout);
+    </script>
+  </body>
+</html>
