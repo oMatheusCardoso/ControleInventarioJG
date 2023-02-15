@@ -125,8 +125,7 @@
       function setData(item) {
 
         getMonths(item.DataCompra);
-        calc(item.ValorCompra, item.DataCompra);
-        
+        calc(item.ValorCompra, item.DataCompra);        
 
         Item.innerHTML = "Item: " + item.Item;
         Modelo.innerHTML = "Modelo: " + item.Modelo;
@@ -161,10 +160,7 @@
             VisuNota.style.display="flex";
 
         };
-      }
-
-      
-
+      }   
       
       async function onScanSuccess(qrCodeMessage) {
         document.getElementById("result").innerHTML =
@@ -182,7 +178,7 @@
       html5QrcodeScanner.render(onScanSuccess, onScanError);
 
       find.addEventListener("click", async () => {
-        const item = await FindData(findID.value);
+        const item = await FindData(findID.value, "TI");
         setData(item);
         
       });
@@ -195,7 +191,6 @@
     });
 }
 
-      
       sair.addEventListener("click", logout);
     </script>
   </body>

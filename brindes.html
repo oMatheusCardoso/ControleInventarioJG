@@ -21,7 +21,7 @@
     <a href="home.html"><button type="button" class="solid" id="backToHome">Voltar</button></a>
     <h3>Controle de Brindes</h3> 
 
-    <h4>Insira o código de Patrimônio</h4>
+    <h4>Insira o nome do Item</h4>
     <input id="findID" type="text" />
     <button id="find" class="solid">Procurar</button>
 
@@ -37,6 +37,7 @@
     <h3 id="DataCompra" type="text"></h3>
     <a id= "VisuNota" target="_blank" href=""><button>Visualizar Nota Fiscal</button></a>
     <h3 id="Obs" type="text"></h3>
+    
     </div>
 
     <script src="scan.js"></script>
@@ -46,7 +47,7 @@
         onAuthStateChanged,
         dbref,
         FindData,
-      } from "./libs/firebase/index-brindes.js";
+      } from "./libs/firebase/index.js";
 
       import { 
         getMonths,
@@ -99,7 +100,7 @@
       }
 
       find.addEventListener("click", async () => {
-        const item = await FindData(findID.value);
+        const item = await FindData(findID.value, "Brindes");
         setData(item);
         
       });

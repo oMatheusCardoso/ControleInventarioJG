@@ -70,7 +70,7 @@
         onAuthStateChanged,
         dbref,
         FindData,
-      } from "./libs/firebase/index-geral.js";
+      } from "./libs/firebase/index.js";
 
       import { 
         getMonths,
@@ -182,7 +182,7 @@
       html5QrcodeScanner.render(onScanSuccess, onScanError);
 
       find.addEventListener("click", async () => {
-        const item = await FindData(findID.value);
+        const item = await FindData(findID.value, "Geral");
         setData(item);
         
       });

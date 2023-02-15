@@ -27,8 +27,8 @@ const auth = getAuth(app);
 const db = getDatabase(app, firebaseConfig.databaseURL);
 const dbref = ref(db);
 
-function FindData(code) {
-	const data = get(child(dbref, "TI/" + code.trim()))
+function FindData(code, db) {
+	const data = get(child(dbref, `${db}/${code.trim()}`))
 		.then((snapshot) => {
 			if (snapshot.exists()) {
 				console.log(snapshot);
