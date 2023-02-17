@@ -1,4 +1,5 @@
 import * as firebase from "https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js";
+import * as storage from "https://www.gstatic.com/firebasejs/9.4.0/firebase-storage.js";
 import {
 	getAuth,
 	onAuthStateChanged,
@@ -28,7 +29,7 @@ const db = getDatabase(app, firebaseConfig.databaseURL);
 const dbref = ref(db);
 
 function FindData(code, db) {
-	const data = get(child(dbref, `${db}/${code.trim()}`))
+	const data = get(child(dbref, `${db}/${code[0].toUpperCase() + code.substring(1).trim()}`))
 		.then((snapshot) => {
 			if (snapshot.exists()) {
 				console.log(snapshot);
@@ -52,5 +53,6 @@ export {
 	dbref,
 	FindData,
 	onAuthStateChanged,
+	storage,
 }
 

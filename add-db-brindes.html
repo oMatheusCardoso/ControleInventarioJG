@@ -20,7 +20,7 @@
   <body>
     <button type="button" class="solid" id="sair">Sair</button>
     <a href="home.html"><button type="button" class="solid" id="backToHome">Voltar</button></a>
-    <a href="add-db-brindes.html"><button type="button" class="solid" id="AddBrindes">Adicionar Itens ao Estoque</button></a>
+    <a href="add-db-brindes.html"><button type="button" class="solid" id="AddBrindes">Adicionar </button></a>
     <h3>Controle de Brindes</h3> 
 
     <h4>Insira o nome do Item</h4>
@@ -32,15 +32,48 @@
 
     <h1>Dados dos Itens</h1>
 
+    <form id="FormUpdate">
+      <div>
+        <label>Item</label>
+        <input type="text" name="Item" id="Item">
+      </div> 
+      <div>
+        <label>Imagem do Item</label>
+        <input type="text" name="Imagem" id="Imagem">
+      </div> 
+      <div>
+        <label>Tipo</label>
+        <input type="text" name="Tipo" id="Tipo">
+      </div> 
+      <div>
+        <label>Item</label>
+        <input type="text" name="Item" id="Item">
+      </div> 
+      <div>
+        <label>Item</label>
+        <input type="text" name="Item" id="Item">
+      </div> 
+      <div>
+        <label>Item</label>
+        <input type="text" name="Item" id="Item">
+      </div> 
+      <div>
+        <label>Item</label>
+        <input type="text" name="Item" id="Item">
+      </div> 
+      <div>
+        <label>Item</label>
+        <input type="text" name="Item" id="Item">
+      </div> 
+      
+    </form>
+
     <h3 id="Item" type="text"></h3>
     <img id="Imagem" src="" alt="Imagem do Item"> 
     <h3 id="Tipo" type="text"></h3>
     <h3 id="Material" type="text"></h3>
     <h3 id="Arte" type="text"></h3>
     <h3 id="Quantidade" type="text"></h3>
-    <h3 id="PrecoCompra" type="text"></h3>
-    <h3 id="CustoProduto" type="text"></h3>
-    <h3 id="PrecoVenda" type="text"></h3>
     <h3 id="DataCompra" type="text"></h3>
     <a id= "VisuNota" target="_blank" href=""><button>Visualizar Nota Fiscal</button></a>
     <h3 id="Obs" type="text"></h3>
@@ -77,15 +110,12 @@
       var Material = document.querySelector("#Material");
       var Arte = document.querySelector("#Arte");
       var Quantidade = document.querySelector("#Quantidade");
-      var DataCompra = document.querySelector("#DataCompra");
+      var DataCompra = document.querySelector("#Item");
       var VisuNota = document.querySelector("#Modelo");
       var Obs = document.querySelector("#Obs");
       var find = document.querySelector("#find");
       var DataCompra = document.querySelector("#DataCompra");
       var Imagem = document.querySelector("#Imagem");	
-      var PrecoCompra = document.querySelector("#PrecoCompra");	
-      var CustoProduto = document.querySelector("#CustoProduto");	
-      var PrecoVenda = document.querySelector("#PrecoVenda");	
 
       function setData(item) {
       
@@ -98,10 +128,7 @@
         Material.innerHTML = "Material: " + item.Material;
         Arte.innerHTML = "Arte: " + item.Arte;
         Quantidade.innerHTML = "Quantidade: " + item.Quantidade;
-        PrecoCompra.innerHTML = "Preço de Compra: " + item.PrecoCompra;
-        CustoProduto.innerHTML = "Custo do Produto Finalizado: " + item.CustoProduto;
-        PrecoVenda.innerHTML = "Valor de Venda: " + item.PrecoVenda;
-        // DataCompra.innerHTML = "DataCompra: " + item.DataCompra;
+        DataCompra.innerHTML = "DataCompra: " + item.DataCompra;
         // VisuNota.innerHTML ="VisuNota: " + item.VisuNota;
         Obs.innerHTML = "Obs: " + item.Obs;
         // VisuNota.setAttribute("href", item.NotaFiscal);
@@ -112,9 +139,16 @@
         if ((VisuNota || Imagem ) != null) {
           
             Imagem.style.display="flex";
-            // VisuNota.style.display="flex"; // Verificar se terá no app final, caso não tenha, retirar.
+            // VisuNota.style.display="flex";
 
         };
+
+      //   if (Imagem != null) {
+          
+          
+      //     Imagem.style.display="flex";
+
+      // };
       }
 
       find.addEventListener("click", async () => {
