@@ -26,46 +26,56 @@
     <h4>Insira o nome do Item</h4>
     <input id="findID" type="text" />
     <button id="find" class="solid">Procurar</button>
-    <button></button>
 
     <div id="dadosItens">
 
     <h1>Dados dos Itens</h1>
+    <h3>Adicionar ao Estoque</h3>
 
     <form id="FormUpdate">
       <div>
-        <label>Item</label>
-        <input type="text" name="Item" id="Item">
+        <label>Item: </label>
+        <br>
+        <input type="text" required name="Item" id="Item">
       </div> 
       <div>
-        <label>Imagem do Item</label>
-        <input type="text" name="Imagem" id="Imagem">
+        <label>Tipo: </label>
+        <br>
+        <input type="text" required name="Tipo" id="Tipo">
       </div> 
       <div>
-        <label>Tipo</label>
-        <input type="text" name="Tipo" id="Tipo">
+        <label>Material: </label>
+        <br>
+        <input type="text" required name="Material" id="Material">
       </div> 
       <div>
-        <label>Item</label>
-        <input type="text" name="Item" id="Item">
+        <label>Arte: </label>
+        <br>
+        <input type="text" required name="Arte" id="Arte">
       </div> 
       <div>
-        <label>Item</label>
-        <input type="text" name="Item" id="Item">
+        <label>Data da Compra: </label>
+        <br>
+        <input type="date"required name="DataCompra" id="DataCompra">
       </div> 
       <div>
-        <label>Item</label>
-        <input type="text" name="Item" id="Item">
+        <label>Obs: </label>
+        <br>
+        <input type="text" name="Obs" id="Obs">
       </div> 
       <div>
-        <label>Item</label>
-        <input type="text" name="Item" id="Item">
+        <label>Imagem da Nota Fiscal: </label>
+        <br>
+        <input type="file" name="uploadNotaFiscal" required id="uploadNotaFiscal">
       </div> 
       <div>
-        <label>Item</label>
-        <input type="text" name="Item" id="Item">
+        <label>Imagem do Item: </label>
+        <br>
+        <input type="file" required name="uploadImagem" id="uploadImagem">
       </div> 
       
+      <input type="submit" id="enviarUpload">
+
     </form>
 
     <h3 id="Item" type="text"></h3>
@@ -81,12 +91,18 @@
     </div>
 
     <script src="scan.js"></script>
+
     <script type="module" async>
       import {
         auth,
         onAuthStateChanged,
         dbref,
         FindData,
+        getStorage,
+        refStorage,
+        storage,
+        storageRef,
+        uploadBytes,
       } from "./libs/firebase/index.js";
 
       import { 
@@ -115,8 +131,12 @@
       var Obs = document.querySelector("#Obs");
       var find = document.querySelector("#find");
       var DataCompra = document.querySelector("#DataCompra");
-      var Imagem = document.querySelector("#Imagem");	
-
+      var Imagem = document.querySelector("#Imagem");
+      var uploadNotaFiscal = document.querySelector("#uploadNotaFiscal");
+      var uploadImagem = document.querySelector("#uploadImagem");
+      var enviarUpload = document.querySelector("#enviarUpload")
+      var FormUpdate = document.querySelector("#FormUpdate");
+      
       function setData(item) {
       
 
@@ -150,6 +170,61 @@
 
       // };
       }
+      
+      // uploadImagem.addEventListener("change", (event) =>{
+      //   console.log(event.target.files);
+      // });
+      FormUpdate.addEventListener("submit", (event) =>{
+
+      event.preventDefault();
+
+      const notaFiscalfile = uploadNotaFiscal.files?.[0];
+      console.log(notaFiscalfile);
+      const uploadNotaFiscalRef = refStorage(storage, `Brindes/NotaFiscal/${notaFiscalfile.name}`);
+
+      uploadBytes(uploadNotaFiscalRef, notaFiscalfile).then((snapshot) =>{
+
+        uploadNotaFiscalRef.getDownloadURL();
+        console.log(getDownloadURL);
+        console.log("Upload com sucesso!");
+
+        
+      });
+
+      const imagemBrindeFile = uploadImagem.files?.[0];
+      console.log(imagemBrindeFile);
+      const uploadImagemRef = refStorage(storage, `Brindes/ImagemBrindes/${imagemBrindeFile.name}`);
+
+      uploadBytes(uploadImagemRef, imagemBrindeFile).then((snapshot) =>{
+        console.log("Upload com sucesso!");
+        alert("Upload com sucesso!");
+      });
+      
+      
+        
+      })
+
+      // enviarUpload.addEventListener("click", (event) => {
+      // // event.preventDefault();
+      // const notaFiscalfile = uploadNotaFiscal.files?.[0];
+      //   console.log(notaFiscalfile);
+
+      // const uploadNotaFiscalRef = refStorage(storage, 'Brindes/NotaFiscal/nomeNotaFiscal.jpg');
+
+      // uploadBytes(uploadNotaFiscalRef, uploadNotaFiscal).then((snapshot) =>{
+      //   console.log("Upload com sucesso!");
+      // });
+
+      // var nomeImagem = "Brindes1";
+
+      // const uploadImagemRef = refStorage(storage, 'Brindes/ImagemBrindes/nomeImagem.jpg');
+
+      // uploadBytes(uploadImagemRef, uploadImagem).then((snapshot) =>{
+      //   console.log("Upload com sucesso!");
+      // });
+
+      // });
+
 
       find.addEventListener("click", async () => {
         const item = await FindData(findID.value, "Brindes");

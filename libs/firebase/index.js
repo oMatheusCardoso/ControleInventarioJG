@@ -1,5 +1,11 @@
 import * as firebase from "https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js";
-import * as storage from "https://www.gstatic.com/firebasejs/9.4.0/firebase-storage.js";
+
+import {
+	getStorage,
+	ref as refStorage,
+	uploadBytes,
+} from "https://www.gstatic.com/firebasejs/9.4.0/firebase-storage.js";
+
 import {
 	getAuth,
 	onAuthStateChanged,
@@ -23,7 +29,8 @@ const firebaseConfig = {
 };
 
 const app = firebase.initializeApp(firebaseConfig);
-
+const storage = getStorage(app);
+const storageRef = refStorage(storage);
 const auth = getAuth(app);
 const db = getDatabase(app, firebaseConfig.databaseURL);
 const dbref = ref(db);
@@ -53,6 +60,10 @@ export {
 	dbref,
 	FindData,
 	onAuthStateChanged,
+	getStorage,
+	refStorage,
 	storage,
+	storageRef,
+	uploadBytes,
 }
 
