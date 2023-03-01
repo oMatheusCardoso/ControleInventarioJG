@@ -23,15 +23,15 @@
 
     <form>
         <div>
-            <div><label for="Email">Email</label></div>
-            <input type="email" name="email" id="email" onchange="onChangeEmail()"  placeholder="jovens.genios@jovensgenios.com">
+            <div><label for="email">Email</label></div>
+            <input type="email" name="email" id="email"  placeholder="jovens.genios@jovensgenios.com">
             <div class="Error" id="email-necessario">Email obrigatório</div>
             <div class="Error" id="email-senha-incorreta">Email ou senha incorreta</div>
         </div>
             
         <div>
-            <div><label for="Senha"></label>Senha</div>
-            <input type="password" name="password" id="password" onchange="onChangePassword()" placeholder="Senha">    
+            <div><label for="password">Senha</label></div>
+            <input type="password" name="password" id="password"  placeholder="Senha">    
             <div class="Error" id="senha-necessaria">Senha obrigatória</div>
         </div>
 
@@ -40,7 +40,7 @@
         </div>
 
         <div>
-            <button type="button" id="recuperar" class="clear" >Recuperar Senha</button>
+            <button type="button" id="recuperar" class="clear" onclick="recoveryPassword()">Recuperar Senha</button>
         </div>
 
         
@@ -50,6 +50,27 @@
     <script src="index.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-auth-compat.js"></script>
+
+    <!-- <script type="module">
+
+    import {
+        auth,
+        sendPasswordResetEmail,
+        onAuthStateChanged,
+        dbref,
+        FindData,
+        SetData,
+        getStorage,
+        refStorage,
+        storage,
+        storageRef,
+        uploadBytes,
+        getDownloadURL,
+    } from "./libs/firebase/index.js";
+
+    login.addEventListener("click", login());
+
+    </script> -->
     <script>
         const firebaseConfig = {
             apiKey: "AIzaSyDeeqdP5trIFnXVirZL1vEcFA6X6mil5Jw",

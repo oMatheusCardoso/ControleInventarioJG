@@ -26,7 +26,7 @@
     <h4>Insira o nome do Item</h4>
     <input id="findID" type="text" />
     <button id="find" class="solid">Procurar</button>
-    <button></button>
+    
 
     <div id="dadosItens">
 
@@ -42,9 +42,9 @@
     <h3 id="CustoProduto" type="text"></h3>
     <h3 id="PrecoVenda" type="text"></h3>
     <h3 id="DataCompra" type="text"></h3>
-    <a id= "VisuNota" target="_blank" href=""><button>Visualizar Nota Fiscal</button></a>
     <h3 id="Obs" type="text"></h3>
-    
+    <a id= "ImagemNotaFiscal" target="_blank" href=""><button>Visualizar Nota Fiscal</button></a>
+
     </div>
 
     <script src="scan.js"></script>
@@ -78,7 +78,7 @@
       var Arte = document.querySelector("#Arte");
       var Quantidade = document.querySelector("#Quantidade");
       var DataCompra = document.querySelector("#DataCompra");
-      var VisuNota = document.querySelector("#Modelo");
+      var ImagemNotaFiscal = document.querySelector("#ImagemNotaFiscal");
       var Obs = document.querySelector("#Obs");
       var find = document.querySelector("#find");
       var DataCompra = document.querySelector("#DataCompra");
@@ -102,17 +102,17 @@
         CustoProduto.innerHTML = "Custo do Produto Finalizado: " + item.CustoProduto;
         PrecoVenda.innerHTML = "Valor de Venda: " + item.PrecoVenda;
         // DataCompra.innerHTML = "DataCompra: " + item.DataCompra;
-        // VisuNota.innerHTML ="VisuNota: " + item.VisuNota;
+        // ImagemNotaFiscal.innerHTML ="NotaFiscal: " + item.VisuNota;
         Obs.innerHTML = "Obs: " + item.Obs;
-        // VisuNota.setAttribute("href", item.NotaFiscal);
+        ImagemNotaFiscal.setAttribute("href", item.ImagemNotaFiscal);
         Imagem.setAttribute ("src", item.Imagem);
 
         console.log(Imagem);
 
-        if ((VisuNota || Imagem ) != null) {
+        if ((ImagemNotaFiscal || Imagem ) != null) {
           
             Imagem.style.display="flex";
-            // VisuNota.style.display="flex"; // Verificar se terá no app final, caso não tenha, retirar.
+            ImagemNotaFiscal.style.display="flex"; // Verificar se terá no app final, caso não tenha, retirar.
 
         };
       }

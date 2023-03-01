@@ -4,11 +4,13 @@ import {
 	getStorage,
 	ref as refStorage,
 	uploadBytes,
+	getDownloadURL,
 } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-storage.js";
 
 import {
 	getAuth,
 	onAuthStateChanged,
+	sendPasswordResetEmail,
 } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-auth.js";
 
 import { 
@@ -16,6 +18,8 @@ import {
 	ref, 
 	get,
 	child,
+	set,
+	push,
 } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-database.js";
 
 const firebaseConfig = {
@@ -55,6 +59,17 @@ function FindData(code, db) {
 		return data;
 }
 
+function SetData(Item, dadosDB) {
+	set(child(dbref, `Brindes/${Item[0].toUpperCase() + Item.substring(1).trim()}`), {
+
+		dadosDB,
+		user : {
+			uid: auth.currentUser.uid
+		}
+
+	})
+}
+
 export {
 	auth,
 	dbref,
@@ -65,5 +80,8 @@ export {
 	storage,
 	storageRef,
 	uploadBytes,
+	getDownloadURL,
+	SetData,
+	sendPasswordResetEmail,
 }
 

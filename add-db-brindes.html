@@ -19,8 +19,8 @@
 
   <body>
     <button type="button" class="solid" id="sair">Sair</button>
-    <a href="home.html"><button type="button" class="solid" id="backToHome">Voltar</button></a>
-    <a href="add-db-brindes.html"><button type="button" class="solid" id="AddBrindes">Adicionar </button></a>
+    <a href="brindes.html"><button type="button" class="solid" id="backToHome">Voltar</button></a>
+    <a href="home.html"><button type="button" class="solid" id="AddBrindes">Home </button></a>
     <h3>Controle de Brindes</h3> 
 
     <h4>Insira o nome do Item</h4>
@@ -36,27 +36,32 @@
       <div>
         <label>Item: </label>
         <br>
-        <input type="text" required name="Item" id="Item">
+        <input type="text"  name="Item" id="Item" >
       </div> 
       <div>
         <label>Tipo: </label>
         <br>
-        <input type="text" required name="Tipo" id="Tipo">
+        <input type="text"  name="Tipo" id="Tipo">
       </div> 
       <div>
         <label>Material: </label>
         <br>
-        <input type="text" required name="Material" id="Material">
+        <input type="text"  name="Material" id="Material">
       </div> 
       <div>
         <label>Arte: </label>
         <br>
-        <input type="text" required name="Arte" id="Arte">
+        <input type="text"  name="Arte" id="Arte">
+      </div> 
+      <div>
+        <label>Quantidade: </label>
+        <br>
+        <input type="number"  name="Quantidade" id="Quantidade">
       </div> 
       <div>
         <label>Data da Compra: </label>
         <br>
-        <input type="date"required name="DataCompra" id="DataCompra">
+        <input type="date" name="DataCompra" id="DataCompra">
       </div> 
       <div>
         <label>Obs: </label>
@@ -66,29 +71,16 @@
       <div>
         <label>Imagem da Nota Fiscal: </label>
         <br>
-        <input type="file" name="uploadNotaFiscal" required id="uploadNotaFiscal">
+        <input type="file" name="uploadNotaFiscal"  id="uploadNotaFiscal" >
       </div> 
       <div>
         <label>Imagem do Item: </label>
         <br>
-        <input type="file" required name="uploadImagem" id="uploadImagem">
-      </div> 
-      
+        <input type="file"  name="uploadImagem" id="uploadImagem" >
+      </div>       
       <input type="submit" id="enviarUpload">
 
     </form>
-
-    <h3 id="Item" type="text"></h3>
-    <img id="Imagem" src="" alt="Imagem do Item"> 
-    <h3 id="Tipo" type="text"></h3>
-    <h3 id="Material" type="text"></h3>
-    <h3 id="Arte" type="text"></h3>
-    <h3 id="Quantidade" type="text"></h3>
-    <h3 id="DataCompra" type="text"></h3>
-    <a id= "VisuNota" target="_blank" href=""><button>Visualizar Nota Fiscal</button></a>
-    <h3 id="Obs" type="text"></h3>
-    
-    </div>
 
     <script src="scan.js"></script>
 
@@ -98,11 +90,13 @@
         onAuthStateChanged,
         dbref,
         FindData,
+        SetData,
         getStorage,
         refStorage,
         storage,
         storageRef,
         uploadBytes,
+        getDownloadURL,
       } from "./libs/firebase/index.js";
 
       import { 
@@ -123,6 +117,7 @@
       // redirectUser();  //DESATIVADO PARA MELHOR TESTE
 
       var Tipo = document.querySelector("#Tipo");
+      var Item = document.querySelector("#Item");
       var Material = document.querySelector("#Material");
       var Arte = document.querySelector("#Arte");
       var Quantidade = document.querySelector("#Quantidade");
@@ -132,98 +127,59 @@
       var find = document.querySelector("#find");
       var DataCompra = document.querySelector("#DataCompra");
       var Imagem = document.querySelector("#Imagem");
+      var ImagemNotaFiscal = document.querySelector("#ImagemNotaFiscal");
       var uploadNotaFiscal = document.querySelector("#uploadNotaFiscal");
       var uploadImagem = document.querySelector("#uploadImagem");
       var enviarUpload = document.querySelector("#enviarUpload")
       var FormUpdate = document.querySelector("#FormUpdate");
+      var getURL = document.querySelector("#getURL");
+      var sair = document.querySelector("#sair");
       
-      function setData(item) {
-      
-
-        getMonths(item.DataCompra);
-        calc(item.ValorCompra, item.DataCompra);
-
-        Tipo.innerHTML = "Tipo: " + item.Tipo;
-        Imagem.innerHTML = "Imagem: " + item.Imagem;        
-        Material.innerHTML = "Material: " + item.Material;
-        Arte.innerHTML = "Arte: " + item.Arte;
-        Quantidade.innerHTML = "Quantidade: " + item.Quantidade;
-        DataCompra.innerHTML = "DataCompra: " + item.DataCompra;
-        // VisuNota.innerHTML ="VisuNota: " + item.VisuNota;
-        Obs.innerHTML = "Obs: " + item.Obs;
-        // VisuNota.setAttribute("href", item.NotaFiscal);
-        Imagem.setAttribute ("src", item.Imagem);
-
-        console.log(Imagem);
-
-        if ((VisuNota || Imagem ) != null) {
-          
-            Imagem.style.display="flex";
-            // VisuNota.style.display="flex";
-
-        };
-
-      //   if (Imagem != null) {
-          
-          
-      //     Imagem.style.display="flex";
-
-      // };
-      }
-      
-      // uploadImagem.addEventListener("change", (event) =>{
-      //   console.log(event.target.files);
-      // });
       FormUpdate.addEventListener("submit", (event) =>{
-
-      event.preventDefault();
+        event.preventDefault();    
 
       const notaFiscalfile = uploadNotaFiscal.files?.[0];
       console.log(notaFiscalfile);
       const uploadNotaFiscalRef = refStorage(storage, `Brindes/NotaFiscal/${notaFiscalfile.name}`);
+      var urlNotaFiscal = (`https://firebasestorage.googleapis.com/v0/b/qrcodejg.appspot.com/o/Brindes%2FNotaFiscal%2F${notaFiscalfile.name}?alt=media&`);
+      
 
       uploadBytes(uploadNotaFiscalRef, notaFiscalfile).then((snapshot) =>{
 
-        uploadNotaFiscalRef.getDownloadURL();
-        console.log(getDownloadURL);
         console.log("Upload com sucesso!");
-
-        
+      
       });
 
       const imagemBrindeFile = uploadImagem.files?.[0];
       console.log(imagemBrindeFile);
       const uploadImagemRef = refStorage(storage, `Brindes/ImagemBrindes/${imagemBrindeFile.name}`);
-
+      var urlBrindes = (`https://firebasestorage.googleapis.com/v0/b/qrcodejg.appspot.com/o/Brindes%2FImagemBrindes%2F${imagemBrindeFile.name}?alt=media`);
+      
       uploadBytes(uploadImagemRef, imagemBrindeFile).then((snapshot) =>{
         console.log("Upload com sucesso!");
         alert("Upload com sucesso!");
       });
-      
-      
+
+      function dadosDB() {     
+        // PreçoDeCompra + CustoDoProdutoFinalizado + ValorDeVenda //Colocar depois essas informações em futuras versões
+        var itensDB = {
+        Item : FormUpdate.Item.value,
+        Imagem : urlBrindes,
+        ImagemNotaFiscal : urlNotaFiscal,
+        Tipo : FormUpdate.Tipo.value,
+        Material : FormUpdate.Material.value,
+        Arte : FormUpdate.Arte.value,
+        DataCompra : FormUpdate.DataCompra.value,
+        Quantidade : FormUpdate.Quantidade.value,
+        Obs : FormUpdate.Obs.value,
         
-      })
+      }
+      return itensDB;
+      }
 
-      // enviarUpload.addEventListener("click", (event) => {
-      // // event.preventDefault();
-      // const notaFiscalfile = uploadNotaFiscal.files?.[0];
-      //   console.log(notaFiscalfile);
-
-      // const uploadNotaFiscalRef = refStorage(storage, 'Brindes/NotaFiscal/nomeNotaFiscal.jpg');
-
-      // uploadBytes(uploadNotaFiscalRef, uploadNotaFiscal).then((snapshot) =>{
-      //   console.log("Upload com sucesso!");
-      // });
-
-      // var nomeImagem = "Brindes1";
-
-      // const uploadImagemRef = refStorage(storage, 'Brindes/ImagemBrindes/nomeImagem.jpg');
-
-      // uploadBytes(uploadImagemRef, uploadImagem).then((snapshot) =>{
-      //   console.log("Upload com sucesso!");
-      // });
-
-      // });
+      SetData(Item.value, dadosDB());
+      
+      });
 
 
       find.addEventListener("click", async () => {
@@ -242,8 +198,8 @@
     });
 }
 
-      
       sair.addEventListener("click", logout);
+
     </script>
   </body>
 </html>
