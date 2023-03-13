@@ -62,7 +62,7 @@ function FindData(code, db) {
 function SetData(Item, dadosDB) {
 	set(child(dbref, `Brindes/${Item[0].toUpperCase() + Item.substring(1).trim()}`), {
 
-		dadosDB,
+		...dadosDB,
 		user : {
 			uid: auth.currentUser.uid
 		}

@@ -1,0 +1,75 @@
+#reader{
+  flex-direction: column;
+  align-content: center;
+  justify-content:center;
+  align-items: center;
+  margin: auto;
+  padding: 20px;
+
+
+}
+#dadosItem{
+  display: flex ;
+  flex-direction: column;
+  align-content: center;
+  justify-content:center;
+  align-items: center;
+  margin: auto;
+  padding: 20px;
+  height: auto;
+  width:auto;
+  
+}
+h3{
+  align-items: center;
+  text-align: justify;
+  margin: auto;
+  padding-left: 20%;
+  
+}
+
+h1{
+  align-items: center;
+  text-align: center;
+  margin-left: auto;
+}
+
+button{
+  margin: auto;
+  
+
+}
+
+#VisuNota{
+  align-items: center;
+  text-align: justify;
+  margin: auto;
+  padding-left: 20%;
+  display: none;
+
+}
+.result{
+    background-color: green;
+    color:#fff;
+    padding:20px;
+  }
+  .row{
+    display:flex;
+  }
+  .body{
+    display:flex;
+    align-items:center;
+
+  }
+
+button{
+  background-color: rgb(213, 213, 213);
+  cursor: pointer;
+  color: black;
+  border-radius: 7px;
+}
+
+#find{ /* usado # para pegar a id*/
+  background-color: purple;
+  color:#fff;
+}

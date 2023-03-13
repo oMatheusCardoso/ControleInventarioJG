@@ -1,0 +1,15 @@
+#Imagem{
+    image-orientation: center;
+    display: none;
+
+
+}
+
+#ImagemNotaFiscal{
+    align-items: center;
+    text-align: justify;
+    margin: auto;
+    padding-left: 20%;
+    display: none;
+
+}
