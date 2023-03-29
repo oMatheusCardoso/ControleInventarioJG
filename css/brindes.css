@@ -1,6 +1,9 @@
 #Imagem{
     image-orientation: center;
     display: none;
+    width: auto;
+    height: 100px;
+    
 
 
 }

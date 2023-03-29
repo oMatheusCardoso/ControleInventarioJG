@@ -19,7 +19,10 @@ import {
 	get,
 	child,
 	set,
-	push,
+	orderByChild,
+	onValue,
+	query,
+	equalTo
 } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-database.js";
 
 const firebaseConfig = {
@@ -39,6 +42,7 @@ const auth = getAuth(app);
 const db = getDatabase(app, firebaseConfig.databaseURL);
 const dbref = ref(db);
 
+
 function FindData(code, db) {
 	const data = get(child(dbref, `${db}/${code[0].toUpperCase() + code.substring(1).trim()}`))
 		.then((snapshot) => {
@@ -57,6 +61,13 @@ function FindData(code, db) {
 
 		
 		return data;
+}
+
+function FindDataByType(code, database) {
+	const data = query(ref(db, `${database}`), orderByChild('Tipo'), equalTo(code[0].toUpperCase() + code.substring(1).trim()));	
+	return onValue(data, (Result) => {
+		console.log(Result.val());
+	})
 }
 
 function SetData(Item, dadosDB) {
@@ -83,5 +94,9 @@ export {
 	getDownloadURL,
 	SetData,
 	sendPasswordResetEmail,
+	FindDataByType,
+	orderByChild,
+	onValue
 }
+
 

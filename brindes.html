@@ -27,7 +27,13 @@
     
 
     <div id="dadosItens">
+    
 
+    <h1>Lista dos Itens</h1>
+
+    <Ol id="ListaItem"></Ol>
+
+<!-- 
     <h1>Dados dos Itens</h1>
 
     <h3 id="Item" type="text"></h3>
@@ -41,7 +47,7 @@
     <h3 id="PrecoVenda" type="text"></h3>
     <h3 id="DataCompra" type="text"></h3>
     <h3 id="Obs" type="text"></h3>
-    <a id= "ImagemNotaFiscal" target="_blank" href=""><button>Visualizar Nota Fiscal</button></a>
+    <a id= "ImagemNotaFiscal" target="_blank" href=""><button>Visualizar Nota Fiscal</button></a> -->
 
     </div>
 
@@ -51,7 +57,8 @@
         auth,
         onAuthStateChanged,
         dbref,
-        FindData,
+        FindDataByType,
+        orderByChild
       } from "./libs/firebase/index.js";
 
       import { 
@@ -84,28 +91,50 @@
       var PrecoCompra = document.querySelector("#PrecoCompra");	
       var CustoProduto = document.querySelector("#CustoProduto");	
       var PrecoVenda = document.querySelector("#PrecoVenda");	
+      var ListaItem =  document.querySelector("#ListaItem");
+      var listaJS = document.querySelector("#listaJS");
+      var listaDB = document.querySelector("#listaDB");
 
       function setData(item) {
       
 
-        getMonths(item.DataCompra);
-        calc(item.ValorCompra, item.DataCompra);
+        // getMonths(item.DataCompra);
+        // calc(item.ValorCompra, item.DataCompra);
 
-        Tipo.innerHTML = "Tipo: " + item.Tipo;
-        Imagem.innerHTML = "Imagem: " + item.Imagem;        
-        Material.innerHTML = "Material: " + item.Material;
-        Arte.innerHTML = "Arte: " + item.Arte;
-        Quantidade.innerHTML = "Quantidade: " + item.Quantidade;
-        PrecoCompra.innerHTML = "Preço de Compra: " + item.PrecoCompra;
-        CustoProduto.innerHTML = "Custo do Produto Finalizado: " + item.CustoProduto;
-        PrecoVenda.innerHTML = "Valor de Venda: " + item.PrecoVenda;
-        // DataCompra.innerHTML = "DataCompra: " + item.DataCompra;
-        // ImagemNotaFiscal.innerHTML ="NotaFiscal: " + item.VisuNota;
-        Obs.innerHTML = "Obs: " + item.Obs;
-        ImagemNotaFiscal.setAttribute("href", item.ImagemNotaFiscal);
-        Imagem.setAttribute ("src", item.Imagem);
+        // Tipo.innerHTML = "Tipo: " + item.Tipo;
+        // Imagem.innerHTML = "Imagem: " + item.Imagem;        
+        // Material.innerHTML = "Material: " + item.Material;
+        // Arte.innerHTML = "Arte: " + item.Arte;
+        // Quantidade.innerHTML = "Quantidade: " + item.Quantidade;
+        // PrecoCompra.innerHTML = "Preço de Compra: " + item.PrecoCompra;
+        // CustoProduto.innerHTML = "Custo do Produto Finalizado: " + item.CustoProduto;
+        // PrecoVenda.innerHTML = "Valor de Venda: " + item.PrecoVenda;
+        // // DataCompra.innerHTML = "DataCompra: " + item.DataCompra;
+        // // ImagemNotaFiscal.innerHTML ="NotaFiscal: " + item.VisuNota;
+        // Obs.innerHTML = "Obs: " + item.Obs;
+        // ImagemNotaFiscal.setAttribute("href", item.ImagemNotaFiscal);
+        // Imagem.setAttribute ("src", item.Imagem);
 
-        console.log(Imagem);
+        listaDB = item;
+        listaJS = JSON.parse(item);
+        console.log(listaJS);
+
+        function Listagem(ListaItem){
+
+          const ListaOrdenada = document.getElementById('ListaItem');
+
+          ListaItem.forEach(ListaItem => {
+            
+            const li = document.createElement('li');
+            Item.innerHTML = "Item: " + listaJS.Item; 
+            li.appendChild(Item);
+          
+            ListaItem.appendChild(li);
+            
+
+          });
+        }
+
 
         if ((ImagemNotaFiscal || Imagem ) != null) {
           
@@ -113,11 +142,13 @@
             ImagemNotaFiscal.style.display="flex"; // Verificar se terá no app final, caso não tenha, retirar.
 
         };
+
+        return Listagem;
       }
 
       find.addEventListener("click", async () => {
-        const item = await FindData(findID.value, "Brindes");
-        setData(item);
+        const item = await FindDataByType(findID.value, "Brindes");
+        setData(item); // usar loop para o set data        
         
       });
 
