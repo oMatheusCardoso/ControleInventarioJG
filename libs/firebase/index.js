@@ -63,12 +63,17 @@ function FindData(code, db) {
 		return data;
 }
 
-function FindDataByType(code, database) {
+function FindDataByType(code, database, setData) {
 	const data = query(ref(db, `${database}`), orderByChild('Tipo'), equalTo(code[0].toUpperCase() + code.substring(1).trim()));	
-	return onValue(data, (Result) => {
+
+	onValue(data, (Result) => {
 		console.log(Result.val());
+		setData(Result.val());
+		
 	})
+
 }
+
 
 function SetData(Item, dadosDB) {
 	set(child(dbref, `Brindes/${Item[0].toUpperCase() + Item.substring(1).trim()}`), {

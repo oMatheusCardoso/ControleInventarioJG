@@ -14,7 +14,7 @@
 
 
   <body>
-    <a href="https://www.jovensgenios.com"><img id="ConteudoLogo" src="logo.png" alt="Logo Jovens Gênios" ></a>
+    <a href="home.html"><img id="ConteudoLogo" src="logo.png" alt="Logo Jovens Gênios" ></a>
 
     <button type="button" class="solid" id="sair">Sair</button>
     <a href="home.html"><button type="button" class="solid" id="backToHome">Voltar</button></a>
@@ -92,12 +92,11 @@
       var CustoProduto = document.querySelector("#CustoProduto");	
       var PrecoVenda = document.querySelector("#PrecoVenda");	
       var ListaItem =  document.querySelector("#ListaItem");
-      var listaJS = document.querySelector("#listaJS");
-      var listaDB = document.querySelector("#listaDB");
+
 
       function setData(item) {
       
-
+        console.log(item);
         // getMonths(item.DataCompra);
         // calc(item.ValorCompra, item.DataCompra);
 
@@ -115,21 +114,30 @@
         // ImagemNotaFiscal.setAttribute("href", item.ImagemNotaFiscal);
         // Imagem.setAttribute ("src", item.Imagem);
 
-        listaDB = item;
-        listaJS = JSON.parse(item);
-        console.log(listaJS);
+      
+        // const transactions = item.map(function(obj){
 
-        function Listagem(ListaItem){
+        //   return Object.keys(obj).map(function(key){
+        //     return obj[key];
+        //   })
+        //   Listagem(transactions);
 
-          const ListaOrdenada = document.getElementById('ListaItem');
+        // });
 
-          ListaItem.forEach(ListaItem => {
+
+        console.log(transactions);
+
+        function Listagem(transactions){
+
+          transactions.forEach((transactions) => {
             
             const li = document.createElement('li');
-            Item.innerHTML = "Item: " + listaJS.Item; 
-            li.appendChild(Item);
-          
+            li.classList.add(transactions.Tipo);          
             ListaItem.appendChild(li);
+
+            const ItemDB = document.createElement('p')
+            ItemDB.innerHTML = "Item: " + transactions.Item
+            li.appendChild(ItemDB);
             
 
           });
@@ -143,12 +151,12 @@
 
         };
 
-        return Listagem;
+        Listagem();
       }
 
       find.addEventListener("click", async () => {
-        const item = await FindDataByType(findID.value, "Brindes");
-        setData(item); // usar loop para o set data        
+        await FindDataByType(findID.value, "Brindes", setData);
+        // usar loop para o set data   
         
       });
 
