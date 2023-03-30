@@ -91,7 +91,7 @@
       var PrecoCompra = document.querySelector("#PrecoCompra");	
       var CustoProduto = document.querySelector("#CustoProduto");	
       var PrecoVenda = document.querySelector("#PrecoVenda");	
-      var ListaItem =  document.querySelector("#ListaItem");
+      var ListaItem =  document.getElementById("ListaItem");
 
 
       function setData(item) {
@@ -124,23 +124,25 @@
 
         // });
 
+        let transactions = item;
+
 
         console.log(transactions);
 
         function Listagem(transactions){
 
-          transactions.forEach((transactions) => {
+          for(let transaction in transactions) {
+            let value = transactions[transaction];
+            let li = document.createElement('li');
+            li.classList.add(value.Tipo);          
             
-            const li = document.createElement('li');
-            li.classList.add(transactions.Tipo);          
-            ListaItem.appendChild(li);
-
-            const ItemDB = document.createElement('p')
-            ItemDB.innerHTML = "Item: " + transactions.Item
+            let ItemDB = document.createElement('p')
+            ItemDB.innerHTML = "Item: " + value.Item
             li.appendChild(ItemDB);
+            ListaItem.appendChild(li);
             
 
-          });
+          };
         }
 
 
@@ -151,7 +153,7 @@
 
         };
 
-        Listagem();
+        Listagem(transactions);
       }
 
       find.addEventListener("click", async () => {
