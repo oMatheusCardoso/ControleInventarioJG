@@ -1,6 +1,6 @@
-#Imagem{
-    image-orientation: center;
-    display: none;
+img{
+    image-orientation: right;
+    /* display: none; */
     width: auto;
     height: 100px;
     

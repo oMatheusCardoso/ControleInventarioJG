@@ -135,10 +135,25 @@
             let value = transactions[transaction];
             let li = document.createElement('li');
             li.classList.add(value.Tipo);          
+
+            let ImagemDB = document.createElement('img')
+            ImagemDB.setAttribute ("src", value.Imagem)
+            li.appendChild(ImagemDB);
             
             let ItemDB = document.createElement('p')
             ItemDB.innerHTML = "Item: " + value.Item
             li.appendChild(ItemDB);
+
+            let TipoDB = document.createElement('p')
+            TipoDB.innerHTML = "Tipo: "+ value.Tipo;
+            li.appendChild(TipoDB);
+          
+            let QuantidadeDB = document.createElement('p')
+            QuantidadeDB.innerHTML = "Quantidade: "+ value.Quantidade;
+            li.appendChild(QuantidadeDB);
+          
+          
+          
             ListaItem.appendChild(li);
             
 
