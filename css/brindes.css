@@ -16,3 +16,8 @@ img{
     display: none;
 
 }
+
+#buttonEditCSS{
+    width: 55px;
+    height: 20px;
+}

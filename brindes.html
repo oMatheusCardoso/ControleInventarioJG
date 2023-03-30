@@ -95,11 +95,7 @@
 
 
       function setData(item) {
-      
-        console.log(item);
-        // getMonths(item.DataCompra);
-        // calc(item.ValorCompra, item.DataCompra);
-
+        // getMonths(
         // Tipo.innerHTML = "Tipo: " + item.Tipo;
         // Imagem.innerHTML = "Imagem: " + item.Imagem;        
         // Material.innerHTML = "Material: " + item.Material;
@@ -122,16 +118,14 @@
         //   })
         //   Listagem(transactions);
 
-        // });
+        // });item.DataCompra);
+        // calc(item.ValorCompra, item.DataCompra);
 
         let transactions = item;
-
-
-        console.log(transactions);
-
         function Listagem(transactions){
 
           for(let transaction in transactions) {
+            
             let value = transactions[transaction];
             let li = document.createElement('li');
             li.classList.add(value.Tipo);          
@@ -151,8 +145,11 @@
             let QuantidadeDB = document.createElement('p')
             QuantidadeDB.innerHTML = "Quantidade: "+ value.Quantidade;
             li.appendChild(QuantidadeDB);
-          
-          
+
+            let buttonEdit = document.createElement('button')
+            buttonEdit.setAttribute("id", "buttonEditCSS")
+            buttonEdit.innerText = "Retirar";
+            li.appendChild(buttonEdit);
           
             ListaItem.appendChild(li);
             

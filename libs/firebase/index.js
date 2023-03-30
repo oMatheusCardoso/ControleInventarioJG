@@ -67,7 +67,6 @@ function FindDataByType(code, database, setData) {
 	const data = query(ref(db, `${database}`), orderByChild('Tipo'), equalTo(code[0].toUpperCase() + code.substring(1).trim()));	
 
 	onValue(data, (Result) => {
-		console.log(Result.val());
 		setData(Result.val());
 		
 	})
