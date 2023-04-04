@@ -16,42 +16,25 @@
   <body>
     <a href="home.html"><img id="ConteudoLogo" src="logo.png" alt="Logo Jovens Gênios" ></a>
 
-    <button type="button" class="solid" id="sair">Sair</button>
-    <a href="home.html"><button type="button" class="solid" id="backToHome">Voltar</button></a>
-    <a href="add-db-brindes.html"><button type="button" class="solid" id="AddBrindes">Adicionar Itens ao Estoque</button></a>
+    <nav> 
+      <button type="button" class="solid" id="sair">Sair</button>
+      <a href="home.html"><button type="button" class="solid" id="backToHome">Voltar</button></a>
+      <a href="add-db-brindes.html"><button type="button" class="solid" id="AddBrindes">Adicionar Itens ao Estoque</button></a>
+    </nav>
     <h3>Controle de Brindes</h3> 
 
     <h4>Insira o nome do Item</h4>
     <input id="findID" type="text" />
     <button id="find" class="solid">Procurar</button>
     
-
     <div id="dadosItens">
     
-
     <h1>Lista dos Itens</h1>
 
     <Ol id="ListaItem"></Ol>
 
-<!-- 
-    <h1>Dados dos Itens</h1>
-
-    <h3 id="Item" type="text"></h3>
-    <img id="Imagem" src="" alt="Imagem do Item"> 
-    <h3 id="Tipo" type="text"></h3>
-    <h3 id="Material" type="text"></h3>
-    <h3 id="Arte" type="text"></h3>
-    <h3 id="Quantidade" type="text"></h3>
-    <h3 id="PrecoCompra" type="text"></h3>
-    <h3 id="CustoProduto" type="text"></h3>
-    <h3 id="PrecoVenda" type="text"></h3>
-    <h3 id="DataCompra" type="text"></h3>
-    <h3 id="Obs" type="text"></h3>
-    <a id= "ImagemNotaFiscal" target="_blank" href=""><button>Visualizar Nota Fiscal</button></a> -->
-
     </div>
-
-    <script src="scan.js"></script>
+    
     <script type="module" async>
       import {
         auth,
@@ -70,7 +53,6 @@
       function redirectUser() {
         onAuthStateChanged(auth, (user) => {
           if (user) {
-            console.log(user);
           } else {
             logout();
           }
@@ -95,32 +77,7 @@
 
 
       function setData(item){
-        // getMonths(
-        // Tipo.innerHTML = "Tipo: " + item.Tipo;
-        // Imagem.innerHTML = "Imagem: " + item.Imagem;        
-        // Material.innerHTML = "Material: " + item.Material;
-        // Arte.innerHTML = "Arte: " + item.Arte;
-        // Quantidade.innerHTML = "Quantidade: " + item.Quantidade;
-        // PrecoCompra.innerHTML = "Preço de Compra: " + item.PrecoCompra;
-        // CustoProduto.innerHTML = "Custo do Produto Finalizado: " + item.CustoProduto;
-        // PrecoVenda.innerHTML = "Valor de Venda: " + item.PrecoVenda;
-        // // DataCompra.innerHTML = "DataCompra: " + item.DataCompra;
-        // // ImagemNotaFiscal.innerHTML ="NotaFiscal: " + item.VisuNota;
-        // Obs.innerHTML = "Obs: " + item.Obs;
-        // ImagemNotaFiscal.setAttribute("href", item.ImagemNotaFiscal);
-        // Imagem.setAttribute ("src", item.Imagem);
-
       
-        // const transactions = item.map(function(obj){
-
-        //   return Object.keys(obj).map(function(key){
-        //     return obj[key];
-        //   })
-        //   Listagem(transactions);
-
-        // });item.DataCompra);
-        // calc(item.ValorCompra, item.DataCompra);
-
         let transactions = item;
         async function Listagem(transactions) {
 
@@ -146,35 +103,19 @@
             QuantidadeDB.innerHTML = "Quantidade: "+ value.Quantidade;
             li.appendChild(QuantidadeDB);
 
+            let aEdit = document.createElement('a')
+            aEdit.setAttribute("id", `${value.Item}`.replace(/\s/g, ''))
+            aEdit.setAttribute("href", "baixa-brindes.html"+ "?id="+value.Item)
+            aEdit.innerText = "Retirar";
+            li.appendChild(aEdit);  
 
-            let buttonEdit = document.createElement('button')
-            buttonEdit.setAttribute("id", `${value.Item}`.replace(/\s/g, ''))
-            buttonEdit.innerText = "Retirar";
-            `${value.Item}`.replace(/\s/g, '').addEventListener("click", window.location.href = "home.html")
-            li.appendChild(buttonEdit);
-            
-            // let buttonEdit = document.createElement('button')
-            // buttonEdit.setAttribute("id", `${value.Item}`.replace(/\s/g, ''))
-            // buttonEdit.innerText = "Retirar";
-            // `${value.Item}`.replace(/\s/g, '').addEventListener("click", window.location.href = "home.html")
-            // li.appendChild(buttonEdit);
-          
-            ListaItem.appendChild(li);
-
-          
+            ListaItem.appendChild(li);       
             
 
           };
         }
 
-        if ((ImagemNotaFiscal || Imagem ) != null) {
-          
-            Imagem.style.display="flex";
-            ImagemNotaFiscal.style.display="flex"; // Verificar se terá no app final, caso não tenha, retirar.
-
-        };
-
-        Listagem(transactions);
+          Listagem(transactions);
         
       }
 

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <title>Brindes</title>
+  
+  </head>
+
+  <link rel="stylesheet" href="./css/css-global.css"/>
+  <link rel="stylesheet" href="./css/baixa-brindes.css"/>
+
+
+  <body>
+    <a href="https://www.jovensgenios.com"><img id="ConteudoLogo" src="logo.png" alt="Logo Jovens Gênios" ></a>
+    <nav> 
+      <button type="button" class="solid" id="sair">Sair</button>
+      <a href="brindes.html"><button type="button" class="solid" id="backToBrindes">Voltar</button></a>
+      <!-- <a href="add-db-brindes.html"><button type="button" class="solid" id="AddBrindes">Adicionar Itens ao Estoque</button></a> -->
+    </nav>
+
+    <h1>Retirada de Brindes</h1>    
+
+    <div id="dadosItens">
+
+    <h3>Dados dos Itens</h3>
+
+    <h3 id="Item" type="text"></h3>
+    <img id="Imagem" src="" alt="Imagem do Item"> 
+    <h3 id="Tipo" type="text"></h3>
+    <h3 id="Material" type="text"></h3>
+    <h3 id="Arte" type="text"></h3>
+    <h3 id="Quantidade" type="text"></h3>
+    <h3 id="PrecoCompra" type="text"></h3>
+    <h3 id="CustoProduto" type="text"></h3>
+    <h3 id="PrecoVenda" type="text"></h3>
+    <h3 id="DataCompra" type="text"></h3>
+    <h3 id="Obs" type="text"></h3>
+    <a id= "ImagemNotaFiscal" target="_blank" href=""><button>Visualizar Nota Fiscal</button></a>
+
+    </div>
+
+    <h4>Preencha com as informações para retirada</h4>
+    <form id="retirar">
+      <div>
+        <label>Solicitante: </label>
+        <input type="text"  name="Solicitante" id="Solicitante" required>
+      </div> 
+      <div>
+        <label>Destino: </label>
+        <input type="text"  name="Destino" id="Destino" required>
+      </div> 
+      <div>
+        <label>Quantidade: </label>
+        <input type="number"  name="QtdSaida" id="QtdSaida" min="1"  required >
+      </div> 
+      <div>
+        <label>Motivo: </label>
+        <input type="text"  name="Motivo" id="Motivo" required>
+      </div> 
+      <input type="submit" id="enviarUpload" value="Finalizar Saída">
+    </form>
+
+    <script type="module" async>
+      import {
+        auth,
+        onAuthStateChanged,
+        dbref,
+        FindData,
+      } from "./libs/firebase/index.js";
+
+      import { 
+        getMonths,
+        calc,
+        formatCurrency,
+      } from "./utils/calcDepreciation.js";
+
+      function redirectUser() {
+        onAuthStateChanged(auth, (user) => {
+          if (user) {
+            logout();
+          }
+        });
+      }
+      // redirectUser();  //DESATIVADO PARA MELHOR TESTE
+
+      var Tipo = document.querySelector("#Tipo");
+      var Material = document.querySelector("#Material");
+      var Arte = document.querySelector("#Arte");
+      var Quantidade = document.querySelector("#Quantidade");
+      var DataCompra = document.querySelector("#DataCompra");
+      var ImagemNotaFiscal = document.querySelector("#ImagemNotaFiscal");
+      var Obs = document.querySelector("#Obs");
+      var find = document.querySelector("#find");
+      var DataCompra = document.querySelector("#DataCompra");
+      var Imagem = document.querySelector("#Imagem");	
+      var PrecoCompra = document.querySelector("#PrecoCompra");	
+      var CustoProduto = document.querySelector("#CustoProduto");	
+      var PrecoVenda = document.querySelector("#PrecoVenda");	
+
+      function setData(item) {
+      
+
+        getMonths(item.DataCompra);
+        calc(item.ValorCompra, item.DataCompra);
+
+        Tipo.innerHTML = "Tipo: " + item.Tipo;
+        Imagem.innerHTML = "Imagem: " + item.Imagem;        
+        Material.innerHTML = "Material: " + item.Material;
+        Arte.innerHTML = "Arte: " + item.Arte;
+        Quantidade.innerHTML = "Quantidade: " + item.Quantidade;
+        PrecoCompra.innerHTML = "Preço de Compra: " + item.PrecoCompra;
+        CustoProduto.innerHTML = "Custo do Produto Finalizado: " + item.CustoProduto;
+        PrecoVenda.innerHTML = "Valor de Venda: " + item.PrecoVenda;
+        // DataCompra.innerHTML = "DataCompra: " + item.DataCompra;
+        // ImagemNotaFiscal.innerHTML ="NotaFiscal: " + item.VisuNota;
+        Obs.innerHTML = "Obs: " + item.Obs;
+        ImagemNotaFiscal.setAttribute("href", item.ImagemNotaFiscal);
+        Imagem.setAttribute ("src", item.Imagem);
+
+        if ((ImagemNotaFiscal || Imagem ) != null) {
+          
+            Imagem.style.display="flex";
+            ImagemNotaFiscal.style.display="flex"; // Verificar se terá no app final, caso não tenha, retirar.
+
+        };
+      }
+
+      var url = window.location.search;
+      var idFromURL = new URLSearchParams(url);
+      var URLid = idFromURL.get("id");
+
+      const item = await FindData(URLid, "Brindes");
+        setData(item);
+      
+      
+      function logout() {
+      auth.signOut().then(() => {
+          window.location.href = "index.html";
+      }).catch(() => {
+          alert('Erro ao fazer logout!')
+    });
+}
+
+      
+      sair.addEventListener("click", logout);
+    </script>
+  </body>
+</html>

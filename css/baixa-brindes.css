@@ -1,0 +1,34 @@
+img{
+    image-orientation: right;
+    /* display: none; */
+    width: auto;
+    height: 100px;
+    
+
+
+}
+
+#ImagemNotaFiscal{
+    align-items: center;
+    text-align: justify;
+    margin: auto;
+    padding-left: 20%;
+    display: none;
+
+}
+
+#buttonEditCSS{
+    width: 55px;
+    height: 20px;
+}
+
+#Imagem{
+    width: auto;
+    height: 200px;
+    margin: auto;
+}
+
+#dadosItens{
+
+    margin: auto;
+}

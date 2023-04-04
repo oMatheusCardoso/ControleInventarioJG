@@ -22,45 +22,38 @@
     <a href="home.html"><button type="button" class="solid" id="AddBrindes">Home </button></a>
     <h3>Controle de Brindes</h3> 
 
-    <h4>Insira o nome do Item</h4>
-    <input id="findID" type="text" />
-    <button id="find" class="solid">Procurar</button>
-
-    <div id="dadosItens">
-
-    <h1>Dados dos Itens</h1>
     <h3>Adicionar ao Estoque</h3>
 
     <form id="FormUpdate">
       <div>
         <label>Item: </label>
         <br>
-        <input type="text"  name="Item" id="Item" >
+        <input type="text"  name="Item" id="Item" required>
       </div> 
       <div>
         <label>Tipo: </label>
         <br>
-        <input type="text"  name="Tipo" id="Tipo">
+        <input type="text"  name="Tipo" id="Tipo" required>
       </div> 
       <div>
         <label>Material: </label>
         <br>
-        <input type="text"  name="Material" id="Material">
+        <input type="text"  name="Material" id="Material" required>
       </div> 
       <div>
         <label>Arte: </label>
         <br>
-        <input type="text"  name="Arte" id="Arte">
+        <input type="text"  name="Arte" id="Arte" required>
       </div> 
       <div>
         <label>Quantidade: </label>
         <br>
-        <input type="number"  name="Quantidade" id="Quantidade">
+        <input type="number"  name="Quantidade" id="Quantidade" min="1" required>
       </div> 
       <div>
         <label>Data da Compra: </label>
         <br>
-        <input type="date" name="DataCompra" id="DataCompra">
+        <input type="date" name="DataCompra" id="DataCompra" required>
       </div> 
       <div>
         <label>Obs: </label>
@@ -70,18 +63,16 @@
       <div>
         <label>Imagem da Nota Fiscal: </label>
         <br>
-        <input type="file" name="uploadNotaFiscal"  id="uploadNotaFiscal" >
+        <input type="file" name="uploadNotaFiscal"  id="uploadNotaFiscal" required>
       </div> 
       <div>
         <label>Imagem do Item: </label>
         <br>
-        <input type="file"  name="uploadImagem" id="uploadImagem" >
+        <input type="file"  name="uploadImagem" id="uploadImagem" required>
       </div>       
-      <input type="submit" id="enviarUpload">
+      <input type="submit" id="enviarUpload" >
 
     </form>
-
-    <script src="scan.js"></script>
 
     <script type="module" async>
       import {
@@ -180,12 +171,6 @@
       
       });
 
-
-      find.addEventListener("click", async () => {
-        const item = await FindData(findID.value, "Brindes");
-        setData(item);
-        
-      });
 
       
       

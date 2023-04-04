@@ -43,6 +43,8 @@ const db = getDatabase(app, firebaseConfig.databaseURL);
 const dbref = ref(db);
 
 
+
+
 function FindData(code, db) {
 	const data = get(child(dbref, `${db}/${code[0].toUpperCase() + code.substring(1).trim()}`))
 		.then((snapshot) => {
@@ -74,15 +76,16 @@ function FindDataByType(code, database, setData) {
 }
 
 
-function SetData(Item, dadosDB) {
+function SetData(Item, dadosDB,) {
 	set(child(dbref, `Brindes/${Item[0].toUpperCase() + Item.substring(1).trim()}`), {
-
 		...dadosDB,
 		user : {
-			uid: auth.currentUser.uid
-		}
-
+			uid: auth.currentUser.uid,
+			email: auth.currentUser.email,
+			// data: dataAtual,
+		},
 	})
+	console.log(data);
 }
 
 export {
