@@ -94,7 +94,7 @@
       var ListaItem =  document.getElementById("ListaItem");
 
 
-      function setData(item) {
+      function setData(item){
         // getMonths(
         // Tipo.innerHTML = "Tipo: " + item.Tipo;
         // Imagem.innerHTML = "Imagem: " + item.Imagem;        
@@ -122,7 +122,7 @@
         // calc(item.ValorCompra, item.DataCompra);
 
         let transactions = item;
-        function Listagem(transactions){
+        async function Listagem(transactions) {
 
           for(let transaction in transactions) {
             
@@ -146,17 +146,26 @@
             QuantidadeDB.innerHTML = "Quantidade: "+ value.Quantidade;
             li.appendChild(QuantidadeDB);
 
+
             let buttonEdit = document.createElement('button')
-            buttonEdit.setAttribute("id", "buttonEditCSS")
+            buttonEdit.setAttribute("id", `${value.Item}`.replace(/\s/g, ''))
             buttonEdit.innerText = "Retirar";
+            `${value.Item}`.replace(/\s/g, '').addEventListener("click", window.location.href = "home.html")
             li.appendChild(buttonEdit);
+            
+            // let buttonEdit = document.createElement('button')
+            // buttonEdit.setAttribute("id", `${value.Item}`.replace(/\s/g, ''))
+            // buttonEdit.innerText = "Retirar";
+            // `${value.Item}`.replace(/\s/g, '').addEventListener("click", window.location.href = "home.html")
+            // li.appendChild(buttonEdit);
           
             ListaItem.appendChild(li);
+
+          
             
 
           };
         }
-
 
         if ((ImagemNotaFiscal || Imagem ) != null) {
           
@@ -166,15 +175,14 @@
         };
 
         Listagem(transactions);
+        
       }
 
       find.addEventListener("click", async () => {
         await FindDataByType(findID.value, "Brindes", setData);
         // usar loop para o set data   
         
-      });
-
-      
+      });    
       
       function logout() {
       auth.signOut().then(() => {
