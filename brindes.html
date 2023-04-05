@@ -34,14 +34,15 @@
     <Ol id="ListaItem"></Ol>
 
     </div>
-    
+    <script src="js/brindes.js"></script>
     <script type="module" async>
       import {
         auth,
         onAuthStateChanged,
         dbref,
         FindDataByType,
-        orderByChild
+        orderByChild,
+        addHistoryData
       } from "./libs/firebase/index.js";
 
       import { 
@@ -81,7 +82,10 @@
         let transactions = item;
         async function Listagem(transactions) {
 
+          ListaItem.innerHTML = "";
+          
           for(let transaction in transactions) {
+
             
             let value = transactions[transaction];
             let li = document.createElement('li');
@@ -120,8 +124,12 @@
       }
 
       find.addEventListener("click", async () => {
-        await FindDataByType(findID.value, "Brindes", setData);
-        // usar loop para o set data   
+        
+        if(findID.value == ""){
+          alert("Campo de pesquisa vazio")
+        } else{
+          await FindDataByType(findID.value, "Brindes", setData);
+        } 
         
       });    
       

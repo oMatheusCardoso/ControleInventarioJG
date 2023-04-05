@@ -66,7 +66,7 @@ function FindData(code, db) {
 }
 
 function FindDataByType(code, database, setData) {
-	const data = query(ref(db, `${database}`), orderByChild('Tipo'), equalTo(code[0].toUpperCase() + code.substring(1).trim()));	
+	const data = query(ref(db, `${database}`), orderByChild('Tipo'), equalTo(code.toLowerCase()));	
 
 	onValue(data, (Result) => {
 		setData(Result.val());
@@ -77,15 +77,33 @@ function FindDataByType(code, database, setData) {
 
 
 function SetData(Item, dadosDB,) {
-	set(child(dbref, `Brindes/${Item[0].toUpperCase() + Item.substring(1).trim()}`), {
-		...dadosDB,
-		user : {
-			uid: auth.currentUser.uid,
-			email: auth.currentUser.email,
-			// data: dataAtual,
-		},
+	set(child(dbref, `Brindes/${Item.toLowerCase()}`),
+		dadosDB,
+	)
+}
+
+function addHistoryData (){
+	set(child(dbref, `HistoricoBrindes/${"saida".toLowerCase()}`),{
+		Tipo: "saida",
+		imagem: "caneca",
+		tipoItem: "caneca" ,
+		dadosItem: "caneca" ,
+		Solicitante: "Joao" ,
+		Destino: "Mesquita" ,
+		Quantidade: 30 ,
+		Descricao: "Ativacao" ,
+		idUsuario: auth.currentUser.uid ,
+		emailUsuario: auth.currentUser.email,
+		dataCompra: "Data da ultima compra",
+		data: new Date().toISOString()
+
+
+
+
 	})
-	console.log(data);
+
+
+
 }
 
 export {
@@ -102,6 +120,7 @@ export {
 	SetData,
 	sendPasswordResetEmail,
 	FindDataByType,
+	addHistoryData,
 	orderByChild,
 	onValue
 }
