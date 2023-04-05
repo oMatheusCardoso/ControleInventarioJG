@@ -99,6 +99,8 @@
       var PrecoCompra = document.querySelector("#PrecoCompra");	
       var CustoProduto = document.querySelector("#CustoProduto");	
       var PrecoVenda = document.querySelector("#PrecoVenda");	
+      var enviarUpload = document.querySelector("#enviarUpload");
+      var retirar = document.querySelector("#retirar");
 
       function setData(item) {
       
@@ -134,7 +136,14 @@
 
       const item = await FindData(URLid, "Brindes");
         setData(item);
-      
+        
+
+      retirar.addEventListener("submit", async () => {
+        // await FindDataByType(findID.value, "Brindes", setData);
+        await addHistoryData(retirar, "saida", item);
+        alert("Saída Efetuada");
+    }); 
+    
       
       function logout() {
       auth.signOut().then(() => {

@@ -82,26 +82,25 @@ function SetData(Item, dadosDB,) {
 	)
 }
 
-function addHistoryData (){
-	set(child(dbref, `HistoricoBrindes/${"saida".toLowerCase()}`),{
-		Tipo: "saida",
-		imagem: "caneca",
-		tipoItem: "caneca" ,
-		dadosItem: "caneca" ,
-		Solicitante: "Joao" ,
-		Destino: "Mesquita" ,
-		Quantidade: 30 ,
-		Descricao: "Ativacao" ,
+function addHistoryData (Lista, tipo, setData){
+	set(child(dbref, `HistoricoBrindes/${tipo.toLowerCase()}`),{
+		
+		Tipo: tipo,
+		imagem: setData.imagem,
+		tipoItem: setData.Tipo ,
+		dadosItem: setData.Item ,
+		Solicitante: Lista.Solicitante ,
+		Destino: Lista.Destino ,
+		Quantidade: Lista.QtdSaida ,
+		Descricao: Lista.Motivo ,
 		idUsuario: auth.currentUser.uid ,
 		emailUsuario: auth.currentUser.email,
-		dataCompra: "Data da ultima compra",
+		dataCompra: setData.DataCompra,
 		data: new Date().toISOString()
 
 
-
-
 	})
-
+	console.log(addHistoryData)
 
 
 }
