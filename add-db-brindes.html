@@ -147,7 +147,6 @@
       var urlBrindes = (`https://firebasestorage.googleapis.com/v0/b/qrcodejg.appspot.com/o/Brindes%2FImagemBrindes%2F${imagemBrindeFile.name}?alt=media`);
       
       uploadBytes(uploadImagemRef, imagemBrindeFile).then((snapshot) =>{
-        console.log("Upload com sucesso!");
         alert("Upload com sucesso!");
       });
 

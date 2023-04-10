@@ -69,6 +69,8 @@
         onAuthStateChanged,
         dbref,
         FindData,
+        addHistoryData,
+        SetDataAtt
       } from "./libs/firebase/index.js";
 
       import { 
@@ -128,6 +130,7 @@
             ImagemNotaFiscal.style.display="flex"; // Verificar se terá no app final, caso não tenha, retirar.
 
         };
+        
       }
 
       var url = window.location.search;
@@ -138,11 +141,49 @@
         setData(item);
         
 
-      retirar.addEventListener("submit", async () => {
-        // await FindDataByType(findID.value, "Brindes", setData);
-        await addHistoryData(retirar, "saida", item);
-        alert("Saída Efetuada");
-    }); 
+      retirar.addEventListener("submit", async () =>{
+      event.preventDefault();
+      function listaBaixa(){
+
+        let listaprenchida = {
+
+        Tipo: "saida",
+        imagemBrinde: item.Imagem,
+        tipoItem: item.Tipo ,
+        dadosItem: item.Item ,
+        Solicitante: retirar.Solicitante.value ,
+        Destino: retirar.Destino.value ,
+        Quantidade: retirar.QtdSaida.value ,
+        Descricao: retirar.Motivo.value ,
+        idUsuario: auth.currentUser.uid ,
+        emailUsuario: auth.currentUser.email,
+        dataCompra: item.DataCompra,
+        data: new Date().toISOString()
+        }
+        return listaprenchida;
+    }
+
+    function calcQuantidade(){
+
+      let attBrindes = {
+      
+      Quantidade: item.Quantidade - retirar.QtdSaida.value,
+    }
+
+    return attBrindes;
+    console.log(attBrindes);
+
+    }
+
+     let idAleatorio = Math.floor(Date.now() * Math.random()).toString(36);
+
+      SetDataAtt(item.Item, calcQuantidade());
+      addHistoryData(listaBaixa(), "saida", idAleatorio);
+
+      alert("Saída Efetuada");
+
+          // await FindDataByType(findID.value, "Brindes", setData);
+  }); 
     
       
       function logout() {

@@ -49,7 +49,6 @@ function FindData(code, db) {
 	const data = get(child(dbref, `${db}/${code[0].toUpperCase() + code.substring(1).trim()}`))
 		.then((snapshot) => {
 			if (snapshot.exists()) {
-				console.log(snapshot);
 
 				return snapshot.val();
 			} else {
@@ -81,28 +80,18 @@ function SetData(Item, dadosDB,) {
 		dadosDB,
 	)
 }
+function SetDataAtt(Item, calc,) {
+	set(child(dbref, `Brindes/${Item.toLowerCase()}`),
+		calc,
+	)
+}
 
-function addHistoryData (Lista, tipo, setData){
-	set(child(dbref, `HistoricoBrindes/${tipo.toLowerCase()}`),{
+function addHistoryData(Lista, tipo, idAleatorio){
+	set(child(dbref, `HistoricoBrindes/${tipo.toLowerCase()}-${idAleatorio}`),{
 		
-		Tipo: tipo,
-		imagem: setData.imagem,
-		tipoItem: setData.Tipo ,
-		dadosItem: setData.Item ,
-		Solicitante: Lista.Solicitante ,
-		Destino: Lista.Destino ,
-		Quantidade: Lista.QtdSaida ,
-		Descricao: Lista.Motivo ,
-		idUsuario: auth.currentUser.uid ,
-		emailUsuario: auth.currentUser.email,
-		dataCompra: setData.DataCompra,
-		data: new Date().toISOString()
-
+		...Lista,
 
 	})
-	console.log(addHistoryData)
-
-
 }
 
 export {
@@ -121,7 +110,8 @@ export {
 	FindDataByType,
 	addHistoryData,
 	orderByChild,
-	onValue
+	onValue,
+	SetDataAtt
 }
 
 
