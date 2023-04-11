@@ -105,19 +105,19 @@
       var retirar = document.querySelector("#retirar");
 
       function setData(item) {
-      
 
-        getMonths(item.DataCompra);
-        calc(item.ValorCompra, item.DataCompra);
+        // getMonths(item.DataCompra);
+        // calc(item.ValorCompra, item.DataCompra);
 
         Tipo.innerHTML = "Tipo: " + item.Tipo;
+        Item.innerHTML = "Item: " + item.Item;
         Imagem.innerHTML = "Imagem: " + item.Imagem;        
         Material.innerHTML = "Material: " + item.Material;
         Arte.innerHTML = "Arte: " + item.Arte;
         Quantidade.innerHTML = "Quantidade: " + item.Quantidade;
-        PrecoCompra.innerHTML = "Preço de Compra: " + item.PrecoCompra;
-        CustoProduto.innerHTML = "Custo do Produto Finalizado: " + item.CustoProduto;
-        PrecoVenda.innerHTML = "Valor de Venda: " + item.PrecoVenda;
+        // PrecoCompra.innerHTML = "Preço de Compra: " + item.PrecoCompra;
+        // CustoProduto.innerHTML = "Custo do Produto Finalizado: " + item.CustoProduto;
+        // PrecoVenda.innerHTML = "Valor de Venda: " + item.PrecoVenda;
         // DataCompra.innerHTML = "DataCompra: " + item.DataCompra;
         // ImagemNotaFiscal.innerHTML ="NotaFiscal: " + item.VisuNota;
         Obs.innerHTML = "Obs: " + item.Obs;
@@ -163,26 +163,24 @@
         return listaprenchida;
     }
 
-    function calcQuantidade(){
-
-      let attBrindes = {
-      
-      Quantidade: item.Quantidade - retirar.QtdSaida.value,
+    function calculo(){
+      if (item.Quantidade >= retirar.QtdSaida.value){
+        let calc = item.Quantidade - retirar.QtdSaida.value;
+        return calc;
+      } else {
+        alert("Quantidade de Retirada é Superior a quantidade em estoque!")
+      }
+    
     }
 
-    return attBrindes;
-    console.log(attBrindes);
-
-    }
+    
 
      let idAleatorio = Math.floor(Date.now() * Math.random()).toString(36);
 
-      SetDataAtt(item.Item, calcQuantidade());
+      SetDataAtt(item.Item, calculo());
       addHistoryData(listaBaixa(), "saida", idAleatorio);
 
       alert("Saída Efetuada");
-
-          // await FindDataByType(findID.value, "Brindes", setData);
   }); 
     
       

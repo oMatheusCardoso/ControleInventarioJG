@@ -153,10 +153,10 @@
       function dadosDB() {     
         // PreçoDeCompra + CustoDoProdutoFinalizado + ValorDeVenda //Colocar depois essas informações em futuras versões
         var itensDB = {
-        Item : FormUpdate.Item.value,
+        Item : FormUpdate.Item.value.toLowerCase().trim(),
         Imagem : urlBrindes,
         ImagemNotaFiscal : urlNotaFiscal,
-        Tipo : FormUpdate.Tipo.value,
+        Tipo : FormUpdate.Tipo.value.toLowerCase().trim(),
         Material : FormUpdate.Material.value,
         Arte : FormUpdate.Arte.value,
         DataCompra : FormUpdate.DataCompra.value,

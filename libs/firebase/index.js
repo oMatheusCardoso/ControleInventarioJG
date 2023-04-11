@@ -22,7 +22,8 @@ import {
 	orderByChild,
 	onValue,
 	query,
-	equalTo
+	equalTo,
+	update
 } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-database.js";
 
 const firebaseConfig = {
@@ -46,7 +47,7 @@ const dbref = ref(db);
 
 
 function FindData(code, db) {
-	const data = get(child(dbref, `${db}/${code[0].toUpperCase() + code.substring(1).trim()}`))
+	const data = get(child(dbref, `${db}/${code.toLowerCase().trim()}`))
 		.then((snapshot) => {
 			if (snapshot.exists()) {
 
@@ -80,9 +81,10 @@ function SetData(Item, dadosDB,) {
 		dadosDB,
 	)
 }
-function SetDataAtt(Item, calc,) {
-	set(child(dbref, `Brindes/${Item.toLowerCase()}`),
-		calc,
+function SetDataAtt(Item, calc) {
+	update(child(dbref, `Brindes/${Item.toLowerCase()}`),{
+		Quantidade: calc,
+	}
 	)
 }
 
