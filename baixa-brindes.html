@@ -82,6 +82,7 @@
       function redirectUser() {
         onAuthStateChanged(auth, (user) => {
           if (user) {
+          } else {
             logout();
           }
         });
@@ -182,7 +183,7 @@
 
       alert("Saída Efetuada");
   }); 
-    
+      
       
       function logout() {
       auth.signOut().then(() => {

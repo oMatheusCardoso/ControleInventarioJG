@@ -80,13 +80,13 @@
       function redirectUser() {
         onAuthStateChanged(auth, (user) => {
           if (user) {
-            console.log(user);
+            
           } else {
             logout();
           }
         });
       }
-      redirectUser(); //DESATIVADO PARA MELHOR TESTE
+      redirectUser();  //DESATIVADO PARA MELHOR TESTE
 
       
 
