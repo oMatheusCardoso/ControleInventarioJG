@@ -127,12 +127,14 @@
       var sair = document.querySelector("#sair");
       
       FormUpdate.addEventListener("submit", (event) =>{
-        event.preventDefault();    
+        event.preventDefault();   
+        
+        let idAleatorio = Math.floor(Date.now() * Math.random()).toString(36);
 
       const notaFiscalfile = uploadNotaFiscal.files?.[0];
       console.log(notaFiscalfile);
-      const uploadNotaFiscalRef = refStorage(storage, `Brindes/NotaFiscal/${notaFiscalfile.name}`);
-      var urlNotaFiscal = (`https://firebasestorage.googleapis.com/v0/b/qrcodejg.appspot.com/o/Brindes%2FNotaFiscal%2F${notaFiscalfile.name}?alt=media&`);
+      const uploadNotaFiscalRef = refStorage(storage, `Brindes/NotaFiscal/${idAleatorio}`);
+      var urlNotaFiscal = (`https://firebasestorage.googleapis.com/v0/b/qrcodejg.appspot.com/o/Brindes%2FNotaFiscal%2F${idAleatorio}?alt=media&`);
       
       uploadBytes(uploadNotaFiscalRef, notaFiscalfile).then((snapshot) =>{
 
@@ -142,11 +144,12 @@
 
       const imagemBrindeFile = uploadImagem.files?.[0];
       console.log(imagemBrindeFile);
-      const uploadImagemRef = refStorage(storage, `Brindes/ImagemBrindes/${imagemBrindeFile.name}`);
-      var urlBrindes = (`https://firebasestorage.googleapis.com/v0/b/qrcodejg.appspot.com/o/Brindes%2FImagemBrindes%2F${imagemBrindeFile.name}?alt=media`);
+      const uploadImagemRef = refStorage(storage, `Brindes/ImagemBrindes/${idAleatorio}`);
+      var urlBrindes = (`https://firebasestorage.googleapis.com/v0/b/qrcodejg.appspot.com/o/Brindes%2FImagemBrindes%2F${idAleatorio}?alt=media`);
       
       uploadBytes(uploadImagemRef, imagemBrindeFile).then((snapshot) =>{
         alert("Upload com sucesso!");
+        document.location.reload(true);
       });
 
       function dadosDB() {     

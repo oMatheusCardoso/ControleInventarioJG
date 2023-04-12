@@ -14,7 +14,7 @@
 
 
   <body>
-    <a href="https://www.jovensgenios.com"><img id="ConteudoLogo" src="logo.png" alt="Logo Jovens Gênios" ></a>
+    <a href="home.html"><img id="ConteudoLogo" src="logo.png" alt="Logo Jovens Gênios" ></a>
     <nav> 
       <button type="button" class="solid" id="sair">Sair</button>
       <a href="brindes.html"><button type="button" class="solid" id="backToBrindes">Voltar</button></a>
@@ -62,15 +62,15 @@
       </div> 
       <div>
         <label>Valor Total: </label>
-        <input type="float"  name="ValorTotalEntrada" id="ValorTotalEntrada" min="1"  required >
+        <input type="number" step="0.1"  name="ValorTotalEntrada" id="ValorTotalEntrada" min="1"  required >
       </div> 
       <div>
         <label>Valor por unidade: </label>
-        <input type="float"  name="ValorUnidadeEntrada" id="ValorUnidadeEntrada" min="1"  required >
+        <input type="number" step="0.1"   name="ValorUnidadeEntrada" id="ValorUnidadeEntrada" min="1"  required >
       </div> 
       <div>
         <label>Obs: </label>
-        <input type="text"  name="ObsEntrada" id="ObsEntrada" required>
+        <input type="text"  name="ObsEntrada" id="ObsEntrada" >
       </div> 
       <div>
         <label>Upload da Nota Fiscal: </label>
@@ -165,12 +165,14 @@
       entrada.addEventListener("submit", async () =>{
       event.preventDefault();
 
+      let idAleatorio = Math.floor(Date.now() * Math.random()).toString(36);
+
       const notaFiscalfile = notaFiscalEntrada.files?.[0];
       console.log(notaFiscalfile);
 
-      const uploadNotaFiscalRef = refStorage(storage, `Brindes/NotaFiscal/${notaFiscalfile.name}`);
+      const uploadNotaFiscalRef = refStorage(storage, `Brindes/NotaFiscal/${idAleatorio}`);
 
-      var urlNotaFiscal = (`https://firebasestorage.googleapis.com/v0/b/qrcodejg.appspot.com/o/Brindes%2FNotaFiscal%2F${notaFiscalfile.name}?alt=media&`);
+      var urlNotaFiscal = (`https://firebasestorage.googleapis.com/v0/b/qrcodejg.appspot.com/o/Brindes%2FNotaFiscal%2F${idAleatorio}?alt=media&`);
 
       uploadBytes(uploadNotaFiscalRef, notaFiscalfile).then((snapshot) =>{
 
@@ -230,9 +232,6 @@
     }
 
     console.log(attEntrada);
-    
-
-     let idAleatorio = Math.floor(Date.now() * Math.random()).toString(36);
 
       SetDataEntrada(item.Item, attEntrada());
       addHistoryData(listaEntrada(), "entrada", idAleatorio);
