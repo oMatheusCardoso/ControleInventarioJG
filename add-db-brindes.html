@@ -63,12 +63,12 @@
       <div>
         <label>Imagem da Nota Fiscal: </label>
         <br>
-        <input type="file" name="uploadNotaFiscal"  id="uploadNotaFiscal" required>
+        <input type="file" name="uploadNotaFiscal"  id="uploadNotaFiscal" accept=".pdf, .jpg, .jpeg, .png" required>
       </div> 
       <div>
         <label>Imagem do Item: </label>
         <br>
-        <input type="file"  name="uploadImagem" id="uploadImagem" required>
+        <input type="file"  name="uploadImagem" id="uploadImagem" accept=".jpg, .jpeg, .png" required>
       </div>       
       <input type="submit" id="enviarUpload" >
 
@@ -134,7 +134,6 @@
       const uploadNotaFiscalRef = refStorage(storage, `Brindes/NotaFiscal/${notaFiscalfile.name}`);
       var urlNotaFiscal = (`https://firebasestorage.googleapis.com/v0/b/qrcodejg.appspot.com/o/Brindes%2FNotaFiscal%2F${notaFiscalfile.name}?alt=media&`);
       
-
       uploadBytes(uploadNotaFiscalRef, notaFiscalfile).then((snapshot) =>{
 
         console.log("Upload com sucesso!");
@@ -171,9 +170,6 @@
       
       });
 
-
-      
-      
       function logout() {
       auth.signOut().then(() => {
           window.location.href = "index.html";

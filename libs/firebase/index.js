@@ -88,6 +88,13 @@ function SetDataAtt(Item, calc) {
 	)
 }
 
+function SetDataEntrada(Item, Entrada) {
+	update(child(dbref, `Brindes/${Item.toLowerCase()}`),{
+		...Entrada,
+	}
+	)
+}
+
 function addHistoryData(Lista, tipo, idAleatorio){
 	set(child(dbref, `HistoricoBrindes/${tipo.toLowerCase()}-${idAleatorio}`),{
 		
@@ -113,7 +120,8 @@ export {
 	addHistoryData,
 	orderByChild,
 	onValue,
-	SetDataAtt
+	SetDataAtt,
+	SetDataEntrada
 }
 
 

@@ -113,6 +113,12 @@
             aEdit.innerText = "Retirar";
             li.appendChild(aEdit);  
 
+            let aEntrada = document.createElement('a')
+            aEntrada.setAttribute("id", `${value.Item}`.replace(/\s/g, ''))
+            aEntrada.setAttribute("href", "entrada-brindes.html"+ "?id="+value.Item)
+            aEntrada.innerText = "Entrada";
+            li.appendChild(aEntrada);  
+
             ListaItem.appendChild(li);       
             
 

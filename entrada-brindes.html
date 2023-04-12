@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
-    <title>Saida Brindes</title>
+    <title>Entrada de Brindes</title>
   
   </head>
 
@@ -21,7 +21,7 @@
       <!-- <a href="add-db-brindes.html"><button type="button" class="solid" id="AddBrindes">Adicionar Itens ao Estoque</button></a> -->
     </nav>
 
-    <h1>Retirada de Brindes</h1>    
+    <h1>Entrada de Brindes</h1>    
 
     <div id="dadosItens">
 
@@ -38,29 +38,45 @@
     <h3 id="PrecoVenda" type="text"></h3>
     <h3 id="DataCompra" type="text"></h3>
     <h3 id="Obs" type="text"></h3>
-    <a id= "ImagemNotaFiscal" target="_blank" href=""><button>Visualizar Nota Fiscal</button></a>
+    <a id= "ImagemNotaFiscal" target="_blank" href=""><button>Visualizar Ultima Nota Fiscal</button></a>
 
     </div>
 
-    <h4>Preencha com as informações para retirada</h4>
-    <form id="retirar">
+    <h4>Preencha com as informações para Entrada</h4>
+    <form id="entrada">
       <div>
-        <label>Solicitante: </label>
-        <input type="text"  name="Solicitante" id="Solicitante" required>
+        <label>Fornecedor: </label>
+        <input type="text"  name="Fornecedor" id="Fornecedor" required>
       </div> 
       <div>
-        <label>Destino: </label>
-        <input type="text"  name="Destino" id="Destino" required>
+        <label>Data da Compra: </label>
+        <input type="date"  name="DataCompraEntrada" id="DataCompraEntrada" required>
+      </div> 
+      <div>
+        <label>Data da Entrega: </label>
+        <input type="date"  name="DataEntregaEntrada" id="DataEntregaEntrada" required>
       </div> 
       <div>
         <label>Quantidade: </label>
-        <input type="number"  name="QtdSaida" id="QtdSaida" min="1"  required >
+        <input type="number"  name="QtdEntrada" id="QtdEntrada" min="1"  required >
       </div> 
       <div>
-        <label>Motivo: </label>
-        <input type="text"  name="Motivo" id="Motivo" required>
+        <label>Valor Total: </label>
+        <input type="float"  name="ValorTotalEntrada" id="ValorTotalEntrada" min="1"  required >
       </div> 
-      <input type="submit" id="enviarUpload" value="Finalizar Saída">
+      <div>
+        <label>Valor por unidade: </label>
+        <input type="float"  name="ValorUnidadeEntrada" id="ValorUnidadeEntrada" min="1"  required >
+      </div> 
+      <div>
+        <label>Obs: </label>
+        <input type="text"  name="ObsEntrada" id="ObsEntrada" required>
+      </div> 
+      <div>
+        <label>Upload da Nota Fiscal: </label>
+        <input type="file"  name="notaFiscalEntrada" id="notaFiscalEntrada" accept=".pdf, .jpg, .jpeg, .png" required>
+      </div> 
+      <input type="submit" id="enviarUpload" value="Finalizar Entrada">
     </form>
 
     <script type="module" async>
@@ -70,7 +86,10 @@
         dbref,
         FindData,
         addHistoryData,
-        SetDataAtt
+        SetDataEntrada,
+        refStorage,
+        storage,
+        uploadBytes
       } from "./libs/firebase/index.js";
 
       import { 
@@ -103,7 +122,8 @@
       var CustoProduto = document.querySelector("#CustoProduto");	
       var PrecoVenda = document.querySelector("#PrecoVenda");	
       var enviarUpload = document.querySelector("#enviarUpload");
-      var retirar = document.querySelector("#retirar");
+      var entrada = document.querySelector("#entrada");
+      var notaFiscalEntrada = document.querySelector("#notaFiscalEntrada")
 
       function setData(item) {
 
@@ -142,48 +162,81 @@
         setData(item);
         
 
-      retirar.addEventListener("submit", async () =>{
+      entrada.addEventListener("submit", async () =>{
       event.preventDefault();
-      function listaBaixa(){
+
+      const notaFiscalfile = notaFiscalEntrada.files?.[0];
+      console.log(notaFiscalfile);
+
+      const uploadNotaFiscalRef = refStorage(storage, `Brindes/NotaFiscal/${notaFiscalfile.name}`);
+
+      var urlNotaFiscal = (`https://firebasestorage.googleapis.com/v0/b/qrcodejg.appspot.com/o/Brindes%2FNotaFiscal%2F${notaFiscalfile.name}?alt=media&`);
+
+      uploadBytes(uploadNotaFiscalRef, notaFiscalfile).then((snapshot) =>{
+
+        console.log("Upload com sucesso!");
+        alert("Entrada Efetuada");
+        document.location.reload(true);
+      
+      });
+
+      function listaEntrada(){
 
         let listaprenchida = {
 
-        Tipo: "saida",
+        Tipo: "entrada",
         imagemBrinde: item.Imagem,
         tipoItem: item.Tipo ,
         dadosItem: item.Item ,
-        Solicitante: retirar.Solicitante.value ,
-        Destino: retirar.Destino.value ,
+        Fornecedor: entrada.Fornecedor.value,
+        DataCompraEntrada: entrada.DataCompraEntrada.value,
         QuantidadeAntes: item.Quantidade,
-        Quantidade: retirar.QtdSaida.value ,
-        Descricao: retirar.Motivo.value ,
-        idUsuario: auth.currentUser.uid ,
+        QtdEntrada: entrada.QtdEntrada.value,
+        ValorTotalEntrada: entrada.ValorTotalEntrada.value,
+        ValorUnidadeEntrada: entrada.ValorUnidadeEntrada.value,
+        ObsEntrada: entrada.ObsEntrada.value,
+        notaFiscalEntrada: urlNotaFiscal,
+        idUsuario: auth.currentUser.uid,
         emailUsuario: auth.currentUser.email,
-        dataCompra: item.DataCompra,
+        dataCompraUltima: item.DataCompra,
+        antigaNF: item.ImagemNotaFiscal,
+        novaNF: entrada.notaFiscalEntrada,
         data: new Date().toISOString()
         }
         return listaprenchida;
     }
 
     function calculo(){
-      if (item.Quantidade >= retirar.QtdSaida.value){
-        let calc = item.Quantidade - retirar.QtdSaida.value;
+      if (QtdEntrada !== 0){
+        let q1 = parseInt(item.Quantidade);
+        let q2 = parseInt(entrada.QtdEntrada.value);
+        let calc = q1 + q2;
         return calc;
       } else {
-        alert("Quantidade de Retirada é Superior a quantidade em estoque!")
+        alert("Preencha a quantidade de entrada!")
       }
     
     }
 
+    function attEntrada(){
+
+      let attbrindesEntrada = {
+        
+        DataCompra: entrada.DataCompraEntrada.value,
+        ImagemNotaFiscal: urlNotaFiscal,
+        Quantidade: calculo(),
+      }
+      return attbrindesEntrada;
+    }
+
+    console.log(attEntrada);
     
 
      let idAleatorio = Math.floor(Date.now() * Math.random()).toString(36);
 
-      SetDataAtt(item.Item, calculo());
-      addHistoryData(listaBaixa(), "saida", idAleatorio);
+      SetDataEntrada(item.Item, attEntrada());
+      addHistoryData(listaEntrada(), "entrada", idAleatorio);
 
-      alert("Saída Efetuada");
-      document.location.reload(true);
   }); 
       
       
