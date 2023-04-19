@@ -53,7 +53,7 @@
       <div>
         <label>Data da Compra: </label>
         <br>
-        <input type="date" name="DataCompra" id="DataCompra" required>
+        <input type="date" name="DataCompra" id="DataCompra" max="" required>
       </div> 
       <div>
         <label>Obs: </label>
@@ -99,7 +99,7 @@
       function redirectUser() {
         onAuthStateChanged(auth, (user) => {
           if (user) {
-            console.log(user);
+            
           } else {
             logout();
           }
@@ -125,6 +125,8 @@
       var FormUpdate = document.querySelector("#FormUpdate");
       var getURL = document.querySelector("#getURL");
       var sair = document.querySelector("#sair");
+
+      DataCompra.max = new Date().toISOString().split("T")[0];
       
       FormUpdate.addEventListener("submit", (event) =>{
         event.preventDefault();   

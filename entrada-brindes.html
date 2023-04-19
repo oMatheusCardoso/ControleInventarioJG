@@ -124,6 +124,8 @@
       var enviarUpload = document.querySelector("#enviarUpload");
       var entrada = document.querySelector("#entrada");
       var notaFiscalEntrada = document.querySelector("#notaFiscalEntrada")
+      var DataCompraEntrada = document.querySelector("#DataCompraEntrada")
+      var DataEntregaEntrada = document.querySelector("#DataEntregaEntrada")
 
       function setData(item) {
 
@@ -157,6 +159,9 @@
       var url = window.location.search;
       var idFromURL = new URLSearchParams(url);
       var URLid = idFromURL.get("id");
+
+      DataCompraEntrada.max = new Date().toISOString().split("T")[0];
+      DataEntregaEntrada.max = new Date().toISOString().split("T")[0];
 
       const item = await FindData(URLid, "Brindes");
         setData(item);
