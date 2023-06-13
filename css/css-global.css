@@ -3,19 +3,48 @@
     font-family: 'Nunito', sans-serif;
     margin: 0px;
     padding: 0px;
+    outline: 0px;
     box-sizing: border-box;
     
 }
 
 body{
     height: 100vh;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    align-content: flex-start;
+    width: 100vw;
+    overflow: auto;
+    flex-direction: column;
+    padding: 16px;
 }
 
-
-
-img#ConteudoLogo{
-
-    margin: auto;
-    max-width: 100%;
-    
+header{
+    width: 100%;
 }
+
+header a {
+    display: flex;
+    justify-content: center;
+
+}
+
+header img{
+    width: 100%;
+    max-width: 640px;
+
+}
+
+main{
+
+
+}
+
+footer{
+    font-size: 13px;
+    text-align: center;
+
+}
+
