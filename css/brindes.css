@@ -21,3 +21,30 @@ img{
     width: 55px;
     height: 20px;
 }
+
+button{
+    padding: 5px;
+    
+}
+#buttons{
+    margin: 1px;
+}
+
+.text_page{
+
+    text-align: center;
+
+}
+
+#findID{
+    margin: auto;
+    display: flex;
+    padding: 2px;
+}
+
+#find{
+
+    justify-content: center;
+    margin: auto;
+    display: flex;
+}

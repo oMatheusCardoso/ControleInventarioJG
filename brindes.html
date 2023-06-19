@@ -14,24 +14,36 @@
 
 
   <body>
+    <header>
     <a href="home.html"><img id="ConteudoLogo" src="logo.png" alt="Logo Jovens Gênios" ></a>
 
-    <nav> 
-      <button type="button" class="solid" id="sair">Sair</button>
-      <a href="home.html"><button type="button" class="solid" id="backToHome">Voltar</button></a>
-      <a href="add-db-brindes.html"><button type="button" class="solid" id="AddBrindes">Adicionar Itens ao Estoque</button></a>
-    </nav>
-    <h3>Controle de Brindes</h3> 
+    <h3 class="text_page">Controle de Brindes</h3> 
+    <h4 class="text_page">Insira o nome do Item</h4>
 
-    <h4>Insira o nome do Item</h4>
     <input id="findID" type="text" />
+    <br>
     <button id="find" class="solid">Procurar</button>
+
+    <h1 class="text_page">Lista dos Itens</h1>
+    </header>
+
+    <main>
+    
     
     <div id="dadosItens">
     
-    <h1>Lista dos Itens</h1>
+   
 
     <Ol id="ListaItem"></Ol>
+    </main>
+
+    <footer>
+      <nav> 
+        <button type="button" class="solid" id="sair">Sair</button>
+        <a href="home.html"><button type="button" class="solid" id="backToHome">Voltar</button></a>
+        <a href="add-db-brindes.html"><button type="button" class="solid" id="AddBrindes">Adicionar Itens ao Estoque</button></a>
+      </nav>
+    </footer>
 
     </div>
     <script src="js/brindes.js"></script>
