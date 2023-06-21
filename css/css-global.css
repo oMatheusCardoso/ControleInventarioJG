@@ -1,4 +1,3 @@
-
 *{
     font-family: 'Nunito', sans-serif;
     margin: 0px;
@@ -45,6 +44,7 @@ main{
 footer{
     font-size: 13px;
     text-align: center;
+    width: 100%;
 
 }
 

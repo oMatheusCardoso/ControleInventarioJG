@@ -1,13 +1,3 @@
-img{
-    image-orientation: right;
-    /* display: none; */
-    width: auto;
-    height: 100px;
-    
-
-
-}
-
 #ImagemNotaFiscal{
     align-items: center;
     text-align: justify;
@@ -47,4 +37,9 @@ button{
     justify-content: center;
     margin: auto;
     display: flex;
+}
+
+img{
+
+    margin:auto;
 }
