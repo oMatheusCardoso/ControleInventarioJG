@@ -26,20 +26,21 @@
       <br>
       <button id="find" class="solid">Procurar</button>
   
-      <h1 class="text_page">Lista dos Itens</h1>
+      <h1 id="lista_itens" style="display: none">Lista dos Itens</h1>
     
     
     <div id="dadosItens">
-
     <Ol id="ListaItem"></Ol>
+    </div>
+  
     </main>
 
     <footer>
-      <nav> 
-        <button type="button" class="solid" id="sair">Sair</button>
-        <a href="home.html"><button type="button" class="solid" id="backToHome">Voltar</button></a>
-        <a href="add-db-brindes.html"><button type="button" class="solid" id="AddBrindes">Adicionar Itens ao Estoque</button></a>
-      </nav>
+      <div id="Buttons"> 
+        <a class="solid" id="sair"><ion-icon name="exit" size="large"></ion-icon></a>
+        <a href="add-db-brindes.html"><ion-icon name="add-circle" size="large"></ion-icon></a>
+        <a href="home.html"><ion-icon name="arrow-back" size="large"></ion-icon></a>
+      </div>
     </footer>
 
     </div>
@@ -68,7 +69,7 @@
           }
         });
       }
-      redirectUser();  //DESATIVADO PARA MELHOR TESTE
+      redirectUser();  
 
       var Tipo = document.querySelector("#Tipo");
       var Material = document.querySelector("#Material");
@@ -84,6 +85,7 @@
       var CustoProduto = document.querySelector("#CustoProduto");	
       var PrecoVenda = document.querySelector("#PrecoVenda");	
       var ListaItem =  document.getElementById("ListaItem");
+      var lista_itens = document.getElementById("lista_itens");
 
 
       function setData(item){
@@ -144,7 +146,9 @@
           alert("Campo de pesquisa vazio")
         } else{
           await FindDataByType(findID.value, "Brindes", setData);
+          lista_itens.setAttribute("style", "display: flex")
         } 
+
         
       });    
       
@@ -159,5 +163,10 @@
       
       sair.addEventListener("click", logout);
     </script>
-  </body>
+
+  <script
+  type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+  ></script>
+</body>
 </html>

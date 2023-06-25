@@ -37,14 +37,15 @@ header img{
 }
 
 main{
-
-
+    margin: auto;
 }
 
 footer{
     font-size: 13px;
     text-align: center;
     width: 100%;
+    position: fixed;
+    bottom:0;
 
 }
 

@@ -6,24 +6,9 @@
     display: none;
 
 }
-
-#buttonEditCSS{
-    width: 55px;
-    height: 20px;
-}
-
 button{
     padding: 5px;
     
-}
-#buttons{
-    margin: 1px;
-}
-
-.text_page{
-
-    text-align: center;
-
 }
 
 #findID{
@@ -40,6 +25,48 @@ button{
 }
 
 img{
-
+    
+    display: flex;
+    max-width: 40%;
+    max-height: 40%;
     margin:auto;
+}
+
+a{
+    margin: auto;
+    color: black;
+}
+
+#Buttons{
+    display: flex;
+    width: 100%;
+    background-color:white;
+    border-radius: 4px;
+}
+.solid{
+    padding: 12px;
+    background-color: white;
+    border-radius: 4px;
+
+
+}
+
+a:visited {
+    color: black;
+}
+
+li {
+    justify-content: center;
+    text-align: center;
+
+}
+
+.text_page{
+    text-align: center;
+
+}
+
+#lista_itens{
+    text-align: center;
+    justify-content: center;
 }
