@@ -10,25 +10,24 @@
   </head>
 
   <link rel="stylesheet" href="./css/css-global.css"/>
-  <link rel="stylesheet" href="./css/baixa-brindes.css"/>
+  <link rel="stylesheet" href="./css/entrada-brindes.css"/>
+  
 
 
   <body>
-    <a href="home.html"><img id="ConteudoLogo" src="logo.png" alt="Logo Jovens Gênios" ></a>
-    <nav> 
-      <button type="button" class="solid" id="sair">Sair</button>
-      <a href="brindes.html"><button type="button" class="solid" id="backToBrindes">Voltar</button></a>
-      <!-- <a href="add-db-brindes.html"><button type="button" class="solid" id="AddBrindes">Adicionar Itens ao Estoque</button></a> -->
-    </nav>
+    <header>
+      <a href="home.html"><img id="ConteudoLogo" src="logo.png" alt="Logo Jovens Gênios" ></a>
+      <h1>Entrada de Brindes</h1>  
+    </header>
 
-    <h1>Entrada de Brindes</h1>    
+    <main>  
 
     <div id="dadosItens">
 
     <h3>Dados dos Itens</h3>
 
     <h3 id="Item" type="text"></h3>
-    <img id="Imagem" src="" alt="Imagem do Item"> 
+    <img id="Imagem" class="Imagem_item" src="" alt="Imagem do Item"> 
     <h3 id="Tipo" type="text"></h3>
     <h3 id="Material" type="text"></h3>
     <h3 id="Arte" type="text"></h3>
@@ -78,6 +77,21 @@
       </div> 
       <input type="submit" id="enviarUpload" value="Finalizar Entrada">
     </form>
+
+    </main>
+
+    <footer>
+      <div id="Buttons"> 
+      <a class="solid" id="sair"><ion-icon name="exit" size="large"></ion-icon></a>
+      <a class="solid" href="home.html"><ion-icon name="home" size="large"></ion-icon></a>
+      <a class="solid" href="brindes.html"><ion-icon name="gift" size="large"></ion-icon></a>
+      </div>
+    </footer>
+
+    <script
+    type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
 
     <script type="module" async>
       import {

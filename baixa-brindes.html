@@ -14,14 +14,13 @@
 
 
   <body>
-    <a href="home.html"><img id="ConteudoLogo" src="logo.png" alt="Logo Jovens Gênios" ></a>
-    <nav> 
-      <button type="button" class="solid" id="sair">Sair</button>
-      <a href="brindes.html"><button type="button" class="solid" id="backToBrindes">Voltar</button></a>
-      <!-- <a href="add-db-brindes.html"><button type="button" class="solid" id="AddBrindes">Adicionar Itens ao Estoque</button></a> -->
-    </nav>
 
-    <h1>Retirada de Brindes</h1>    
+    <header>
+    <a href="home.html"><img id="ConteudoLogo" src="logo.png" alt="Logo Jovens Gênios" ></a>
+    <h1>Retirada de Brindes</h1>   
+    </header>
+    
+    <main>
 
     <div id="dadosItens">
 
@@ -62,6 +61,22 @@
       </div> 
       <input type="submit" id="enviarUpload" value="Finalizar Saída">
     </form>
+
+    </main>
+
+    <footer>
+      <div id="Buttons"> 
+        <a class="solid" id="sair"><ion-icon name="exit" size="large"></ion-icon></a>
+        <a class="solid" href="home.html"><ion-icon name="home" size="large"></ion-icon></a>
+        <a class="solid" href="brindes.html"><ion-icon name="gift" size="large"></ion-icon></a>
+        </div>
+
+    </footer>
+
+    <script
+    type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
 
     <script type="module" async>
       import {

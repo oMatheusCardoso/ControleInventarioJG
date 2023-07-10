@@ -111,28 +111,28 @@
             li.appendChild(ImagemDB);
             
             let ItemDB = document.createElement('p')
-            ItemDB.innerHTML = "Item: " + value.Item
+            ItemDB.innerHTML = "<b> Item: </b>" + value.Item
             li.appendChild(ItemDB);
 
             let TipoDB = document.createElement('p')
-            TipoDB.innerHTML = "Tipo: "+ value.Tipo;
+            TipoDB.innerHTML = "<b> Tipo: </b>"+ value.Tipo;
             li.appendChild(TipoDB);
           
             let QuantidadeDB = document.createElement('p')
-            QuantidadeDB.innerHTML = "Quantidade: "+ value.Quantidade;
+            QuantidadeDB.innerHTML = "<b> Quantidade: </b> "+ value.Quantidade;
             li.appendChild(QuantidadeDB);
-
-            let aEdit = document.createElement('a')
-            aEdit.setAttribute("id", `${value.Item}`.replace(/\s/g, ''))
-            aEdit.setAttribute("href", "baixa-brindes.html"+ "?id="+value.Item)
-            aEdit.innerText = "Retirar";
-            li.appendChild(aEdit);  
 
             let aEntrada = document.createElement('a')
             aEntrada.setAttribute("id", `${value.Item}`.replace(/\s/g, ''))
             aEntrada.setAttribute("href", "entrada-brindes.html"+ "?id="+value.Item)
             aEntrada.innerText = "Adicionar";
             li.appendChild(aEntrada);  
+
+            let aEdit = document.createElement('a')
+            aEdit.setAttribute("id", `${value.Item}`.replace(/\s/g, ''))
+            aEdit.setAttribute("href", "baixa-brindes.html"+ "?id="+value.Item)
+            aEdit.innerText = "Retirar";
+            li.appendChild(aEdit);  
 
             ListaItem.appendChild(li);       
             

@@ -10,62 +10,62 @@
   </head>
 
   <link rel="stylesheet" href="./css/css-global.css"/>
-  <link rel="stylesheet" href="./css/brindes.css"/>
+  <link rel="stylesheet" href="./css/add-db-brindes.css"/>
 
 
   <body>
 
-    <a href="home.html"><img id="ConteudoLogo" src="logo.png" alt="Logo Jovens Gênios" ></a>
+    <header>
+      <a href="home.html"><img id="ConteudoLogo" src="logo.png" alt="Logo Jovens Gênios" ></a>
+      <h3>Adicionar item ao Estoque</h3>
+    </header>
+    
 
-    <button type="button" class="solid" id="sair">Sair</button>
-    <a href="brindes.html"><button type="button" class="solid" id="backToHome">Voltar</button></a>
-    <a href="home.html"><button type="button" class="solid" id="AddBrindes">Home </button></a>
-    <h3>Controle de Brindes</h3> 
 
-    <h3>Adicionar ao Estoque</h3>
-
+    
+    <main>
     <form id="FormUpdate">
-      <div>
+      <div class="formulario">
         <label>Item: </label>
         <br>
         <input type="text"  name="Item" id="Item" required>
       </div> 
-      <div>
+      <div class="formulario">
         <label>Tipo: </label>
         <br>
         <input type="text"  name="Tipo" id="Tipo" required>
       </div> 
-      <div>
+      <div class="formulario">
         <label>Material: </label>
         <br>
         <input type="text"  name="Material" id="Material" required>
       </div> 
-      <div>
+      <div class="formulario">
         <label>Arte: </label>
         <br>
         <input type="text"  name="Arte" id="Arte" required>
       </div> 
-      <div>
+      <div class="formulario">
         <label>Quantidade: </label>
         <br>
         <input type="number"  name="Quantidade" id="Quantidade" min="1" required>
       </div> 
-      <div>
+      <div class="formulario">
         <label>Data da Compra: </label>
         <br>
         <input type="date" name="DataCompra" id="DataCompra" max="" required>
       </div> 
-      <div>
+      <div class="formulario">
         <label>Obs: </label>
         <br>
         <input type="text" name="Obs" id="Obs">
       </div> 
-      <div>
+      <div class="formulario">
         <label>Imagem da Nota Fiscal: </label>
         <br>
         <input type="file" name="uploadNotaFiscal"  id="uploadNotaFiscal" accept=".pdf, .jpg, .jpeg, .png" required>
       </div> 
-      <div>
+      <div class="formulario">
         <label>Imagem do Item: </label>
         <br>
         <input type="file"  name="uploadImagem" id="uploadImagem" accept=".jpg, .jpeg, .png" required>
@@ -74,6 +74,21 @@
 
     </form>
 
+    </main>
+    
+    <footer>
+      <div id="Buttons"> 
+        <a class="solid" id="sair"><ion-icon name="exit" size="large"></ion-icon></a>
+        <a class="solid" href="home.html"><ion-icon name="home" size="large"></ion-icon></a>
+        <a class="solid" href="brindes.html"><ion-icon name="gift" size="large"></ion-icon></a>
+        </div>
+
+    </footer>
+
+    <script
+    type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
     <script type="module" async>
       import {
         auth,
