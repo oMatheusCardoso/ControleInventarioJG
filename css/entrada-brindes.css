@@ -1,1 +1,81 @@
 
+#Imagem{
+width: 70%; 
+height: 40%; 
+object-fit: cover;
+margin: auto;
+border:2px solid ;
+}
+
+a{
+  margin: auto;
+  color: black;
+}
+
+a:visited {
+  color: black;
+}
+
+#Buttons{
+  display: flex;
+  width: 100%;
+  background-color:white;
+  border-radius: 4px;
+}
+.solid{
+  padding: 12px;
+  background-color: white;
+  border-radius: 4px;
+}
+
+#ImagemNotaFiscal{
+  margin: auto;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  padding: 4px;
+  width: 50%;
+  text-decoration: none;
+  border: 2px solid black;
+  border-radius: 4px;
+  background-color:darkgray;
+  color: black;
+  
+}
+
+.titulo{
+  align-items: center;
+  text-align: center;
+  font-size: 22px;
+  padding: 10px;
+}
+
+
+header h1{
+  text-align: center;
+  justify-content: center;
+}
+
+#dadosItens{
+  margin: 4px;
+  border-radius: 4px;
+  background-color: rgb(206, 206, 206);
+  align-items: center;
+  text-align:center;
+  padding: 2px;
+  
+}
+
+
+form{
+  margin-bottom: 100px;
+  text-align: left;
+  border-radius: 4px;
+  background-color: rgb(206, 206, 206);
+}
+
+form h4{
+  font-size: 18px;
+  text-align: center;
+  padding: 10px;
+  margin-bottom: 30px;
+}
