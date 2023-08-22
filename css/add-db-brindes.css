@@ -2,6 +2,49 @@ h3 {
   text-align: center;
 }
 
+#FormUpdate{
+  margin: 4px;
+  border-radius: 4px;
+  background-color: rgb(206, 206, 206);
+  align-items: center;
+  text-align:center;
+  padding: 2px;
+  font-size: 19px;
+  margin-bottom: 100px;
+  font-weight: bold;
+  
+}
+
 .formulario{
   
+}
+
+#uploadNotaFiscal{
+  padding: 10px;
+  margin: auto;
+}
+
+#uploadImagem{
+
+
+}
+
+input{
+
+  padding: 3px;
+}
+
+#enviarUpload{
+  display: flex;
+  margin: auto;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  padding: 12px;
+  text-decoration: none;
+  border: 2px solid black;
+  border-radius: 4px;
+  background-color:darkgray;
+  color: black;
+  font-weight: bold;
+
 }

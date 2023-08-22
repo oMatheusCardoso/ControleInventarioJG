@@ -14,53 +14,61 @@
 
   <body>
 
-    <a href="home.html"><img id="ConteudoLogo" src="logo.png" alt="Logo Jovens Gênios" ></a>
+    <header>
+      <a href="home.html"><img id="ConteudoLogo" src="logo.png" alt="Logo Jovens Gênios" ></a>
 
-    <h4>Pesquisa TI</h4>
-    <div class="row">
-      <div class="col">
-        <div id="reader"></div>
+      <h2>Pesquisa TI</h2>
+    <main>
+      <div class="row">
+        <div class="col">
+          <div id="reader"></div>
+        </div>
       </div>
-    </div>
-
-    <br />
-    <button type="button" class="solid" id="sair">Sair</button>
-    <a href="home.html"><button type="button" class="solid" id="backToHome">Voltar</button></a>
     
+      <h4>Código de Patrimônio</h4>
+      <div class="col" style="padding: 30px">
+        <div id="result"></div>
+      </div>
+  
+      <h4>Insira o código de Patrimônio</h4>
+      <input id="findID" type="text" />
+      <button id="find" class="solid">Procurar</button>
+    </header>
 
-    <h4>Código de Patrimônio</h4>
-    <div class="col" style="padding: 30px">
-      <div id="result"></div>
-    </div>
 
-    <h4>Insira o código de Patrimônio</h4>
-    <input id="findID" type="text" />
-    <button id="find" class="solid">Procurar</button>
+      <div id="dadosItens" >
 
-    <div id="dadosItens">
+        <h1>Dados dos Itens</h1>
+    
+        <h3 id="Item" type="text"></h3>
+        <h3 id="Modelo" type="text"></h3>
+        <h3 id="UserAtual" type="text"></h3>
+        <h3 id="Armazenamento" type="text"></h3>
+        <h3 id="CodigoDePatrimonioAntigo" type="text"></h3>
+        <h3 id="CodigoDePatrimonioNovo" type="text"></h3>
+        <h3 id="Estado" type="text"></h3>
+        <h3 id="MemoriaRam" type="text"></h3>
+        <h3 id="Nserie" type="text"></h3>
+        <h3 id="Processador" type="text"></h3>
+        <h3 id="SistemaOperacional" type="text"></h3>
+        <h3 id="UserAnterior" type="text"></h3>
+        <h3 id="CodCarregador" type="text"></h3>
+        <h3 id="ValorCompra" type="float"></h3>
+        <h3 id="DataCompra" type="text"></h3>
+        <h3 id="Depreciacao" type="text"></h3>
+        <h3 id="NotaFiscal" type="text"></h3>    
+        <a id= "VisuNota" target="_blank" href=""><button>Visualizar Nota Fiscal</button></a>
+        <h3 id="Obs" type="text"></h3>
+        </div>
+    </main>
 
-    <h1>Dados dos Itens</h1>
-
-    <h3 id="Item" type="text"></h3>
-    <h3 id="Modelo" type="text"></h3>
-    <h3 id="UserAtual" type="text"></h3>
-    <h3 id="Armazenamento" type="text"></h3>
-    <h3 id="CodigoDePatrimonioAntigo" type="text"></h3>
-    <h3 id="CodigoDePatrimonioNovo" type="text"></h3>
-    <h3 id="Estado" type="text"></h3>
-    <h3 id="MemoriaRam" type="text"></h3>
-    <h3 id="Nserie" type="text"></h3>
-    <h3 id="Processador" type="text"></h3>
-    <h3 id="SistemaOperacional" type="text"></h3>
-    <h3 id="UserAnterior" type="text"></h3>
-    <h3 id="CodCarregador" type="text"></h3>
-    <h3 id="ValorCompra" type="float"></h3>
-    <h3 id="DataCompra" type="text"></h3>
-    <h3 id="Depreciacao" type="text"></h3>
-    <h3 id="NotaFiscal" type="text"></h3>    
-    <a id= "VisuNota" target="_blank" href=""><button>Visualizar Nota Fiscal</button></a>
-    <h3 id="Obs" type="text"></h3>
-    </div>
+    <footer>
+      <div id="Buttons"> 
+        <a class="solid" id="sair"><ion-icon name="exit" size="large"></ion-icon></a>
+        <a href="add-db-brindes.html"><ion-icon name="add-circle" size="large"></ion-icon></a>
+        <a href="home.html"><ion-icon name="arrow-back" size="large"></ion-icon></a>
+      </div>
+    </footer> 
     <script src="html5-qrcode.min.js"></script>
     <script src="scan.js"></script>
     <script type="module" async>

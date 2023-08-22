@@ -39,6 +39,7 @@ a:visited {
   border-radius: 4px;
   background-color:darkgray;
   color: black;
+  font-weight: bold;
   
 }
 
@@ -78,4 +79,29 @@ form h4{
   text-align: center;
   padding: 10px;
   margin-bottom: 30px;
+}
+
+label{
+  font-size: 18px;  
+}
+
+.item_forms{
+  display: flex;
+  margin: 4px 0px 4px 0px;
+  
+}
+
+#enviarUpload{
+  display: flex;
+  margin: auto;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  padding: 4px;
+  text-decoration: none;
+  border: 2px solid black;
+  border-radius: 4px;
+  background-color:darkgray;
+  color: black;
+  font-weight: bold;
+
 }

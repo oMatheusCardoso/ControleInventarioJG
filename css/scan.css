@@ -17,19 +17,13 @@ h3, h4{
   
 }
 
-h1{
+h2{
   align-items: center;
   text-align: center;
   margin: auto;
 }
 
-button{
-  margin: auto;
-  padding: 4px;
-  
-  
 
-}
 
 #VisuNota{
   align-items: center;
@@ -43,6 +37,9 @@ button{
   }
   .row{
     display:flex;
+    margin: auto;
+    
+    
   }
   .body{
     display:flex;
@@ -63,14 +60,18 @@ button{
   color:#fff;
 
 }
-#row{
-margin: auto;
-  
+.row{
+  justify-content: space-around;
+  margin: 0px 0px 10px 0px;
+  align-items: center;
 }
 #reader{
+  display: flex;
+  display: contents;
   margin: auto;
   width: 100vw;
 }
+
 
 #findID{
   margin: auto;
@@ -81,3 +82,15 @@ margin: auto;
 #sair{
   margin-left: 37%;
 }
+
+#dadosItens{
+  display: flex;
+  display: table-column;
+  margin-bottom: 100px;
+}
+
+#Obs{
+
+  margin-bottom: 100px;
+}
+

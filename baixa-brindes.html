@@ -24,10 +24,10 @@
 
     <div id="dadosItens">
 
-    <h3>Dados dos Itens</h3>
+    <h3 class="titulo">Dados dos Itens</h3>
 
-    <h3 id="Item" type="text"></h3>
     <img id="Imagem" src="" alt="Imagem do Item"> 
+    <h3 id="Item" type="text"></h3>
     <h3 id="Tipo" type="text"></h3>
     <h3 id="Material" type="text"></h3>
     <h3 id="Arte" type="text"></h3>
@@ -37,25 +37,25 @@
     <h3 id="PrecoVenda" type="text"></h3>
     <h3 id="DataCompra" type="text"></h3>
     <h3 id="Obs" type="text"></h3>
-    <a id= "ImagemNotaFiscal" target="_blank" href=""><button>Visualizar Nota Fiscal</button></a>
+    <a id= "ImagemNotaFiscal" target="_blank" href="">Clique para visualizar ultima nota fiscal</a>
 
     </div>
 
-    <h4>Preencha com as informações para retirada</h4>
     <form id="retirar">
-      <div>
+      <h4>Preencha com as informações para retirada</h4>
+      <div class="item_forms">
         <label>Solicitante: </label>
         <input type="text"  name="Solicitante" id="Solicitante" required>
       </div> 
-      <div>
+      <div class="item_forms">
         <label>Destino: </label>
         <input type="text"  name="Destino" id="Destino" required>
       </div> 
-      <div>
+      <div class="item_forms">
         <label>Quantidade: </label>
         <input type="number"  name="QtdSaida" id="QtdSaida" min="1"  required >
       </div> 
-      <div>
+      <div class="item_forms">
         <label>Motivo: </label>
         <input type="text"  name="Motivo" id="Motivo" required>
       </div> 
